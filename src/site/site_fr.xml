@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Lutece">
+
+    <skin>
+        <groupId>fr.paris.lutece.tools</groupId>
+        <artifactId>lutece-maven-skin</artifactId>
+        <version>0.9.0-SNAPSHOT</version>
+    </skin>
+    
+    <bannerLeft>
+        <name>LUTECE</name>
+        <src>images/banner_left.png</src>
+        <href>http://dev.lutece.paris.fr/</href>
+    </bannerLeft>
+    <bannerRight>
+        <name>LUTECE</name>
+        <src>images/banner_right.png</src>
+    </bannerRight>
+    
+    <custom>
+        <fluidoSkin>
+            <gitHub>
+                <projectId>${github.project}</projectId>
+                <ribbonOrientation>right</ribbonOrientation>
+                <ribbonColor>black</ribbonColor>
+            </gitHub>
+            <twitter>
+                <user>${twitter.account}</user>
+                <showUser>true</showUser>
+                <showFollowers>true</showFollowers>
+            </twitter>
+            <ohloh>
+                <projectId>${openhub.id}</projectId>
+                <widget>thin-badge</widget>
+            </ohloh>        
+        </fluidoSkin>
+    </custom>
+	
+    <publishDate format="dd MMMM yyyy" position="left" />
+    <version position="left" />
+    <body>
+        <links>
+            <item name="Accueil" href="../../../fr/" />
+            <item name="Lutèce" href="http://fr.lutece.paris.fr/" />
+            <item name="Plugins Lutèce" href="../../../fr/available-plugins.html" />
+        </links>
+		
+        <menu ref="reports" inherit="bottom" />
+
+    </body>
+</project>
