@@ -5,15 +5,18 @@
     <name>Lutece global pom</name>
     <url>http://dev.lutece.paris.fr/</url> 
     <packaging>pom</packaging>
-    <version>3.0-SNAPSHOT</version>
+    <version>3.0</version>
    
     <properties>
+        <memory.min>128m</memory.min>
+        <memory.max>896m</memory.max>
         <targetJdk>1.7</targetJdk>
+        <java.source.version>1.7</java.source.version>
         <sonar.host.url>http://dev.lutece.paris.fr/sonar</sonar.host.url>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-site-plugin.version>3.4</maven-site-plugin.version>
         <checkstyle-plugin.version>2.11</checkstyle-plugin.version> <!-- Pb with 2.12. 2.13 to access license header -->
-        <maven-pmd-plugin.version>3.1</maven-pmd-plugin.version>
+        <maven-pmd-plugin.version>3.3</maven-pmd-plugin.version>
         <lutece.plugin.version>4.0.0-SNAPSHOT</lutece.plugin.version>
         <serverUrl>dev.lutece.paris.fr</serverUrl>
         <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
@@ -136,6 +139,22 @@
 
         <plugins>
             <plugin>
+              <artifactId>maven-release-plugin</artifactId>
+              <version>2.5.1</version>
+              <configuration>
+                <providerImplementations>
+                  <git>jgit</git>
+                </providerImplementations>
+              </configuration>
+              <dependencies>
+                <dependency>
+                  <groupId>org.apache.maven.scm</groupId>
+                  <artifactId>maven-scm-provider-jgit</artifactId>
+                  <version>1.9.2</version>
+                </dependency>
+              </dependencies>
+            </plugin>
+            <plugin>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>${maven-site-plugin.version}</version>
                 <configuration>
@@ -143,14 +162,13 @@
                     <outputEncoding>UTF-8</outputEncoding>
                     <locales>en,fr</locales>
                     <reportPlugins>
-
-                        <plugin>
+                       <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
                             <version>2.10.1</version>
                             <configuration>
-                                <minmemory>128m</minmemory>
-                                <maxmemory>512m</maxmemory>
+                                <minmemory>${memory.min}</minmemory>
+                                <maxmemory>${memory.max}</maxmemory>
                             </configuration>
                         </plugin>
                         <plugin>
@@ -191,7 +209,7 @@
                                     <reports>
                                         <report>index</report>
                                         <report>summary</report>
-                                       <!-- <report>dependencies</report> --> <!-- Removed in order to remove the jboss black listed repository when executing "mvn site" -->
+                                        <!-- <report>dependencies</report> --> <!-- Removed in order to remove the jboss black listed repository when executing "mvn site" -->
                                         <report>cim</report>
                                         <report>issue-tracking</report>
                                         <report>license</report>
@@ -204,12 +222,6 @@
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-checkstyle-plugin</artifactId>
                             <version>${checkstyle-plugin.version}</version>
-                            <configuration>
-                               <minmemory>128m</minmemory>
-                                <maxmemory>728m</maxmemory>
-                                <configLocation>${build-config.location}/lutece_checks.xml</configLocation>
-                                <headerLocation>${build-config.location}/checkstyle-header.txt</headerLocation>
-                            </configuration>
                             <reportSets>
                                 <reportSet>
                                     <reports>
@@ -218,21 +230,13 @@
                                 </reportSet>
                             </reportSets>
                         </plugin>
--->
-<!--                     Problem of ClassNotFoundException   
+                        
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-pmd-plugin</artifactId>
                             <version>${maven-pmd-plugin.version}</version>
-                            <configuration>
-                                <minmemory>128m</minmemory>
-                                <maxmemory>512m</maxmemory>
-                                <rulesets>
-                                    <ruleset>${build-config.location}/lutece_PMD.xml</ruleset>
-                                </rulesets>
-                            </configuration>
                         </plugin>
--->
+                        
 
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
@@ -260,7 +264,7 @@
                             </reportSets>
                         </plugin>
                         -->
-                       <plugin>
+                        <plugin>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>taglist-maven-plugin</artifactId>
                             <version>2.4</version>
@@ -339,8 +343,8 @@
                 <version>3.1</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>${java.source.version}</source>
+                    <target>${java.source.version}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -450,12 +454,46 @@
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${checkstyle-plugin.version}</version>
                     <configuration>
-                        <minmemory>128m</minmemory>
-                        <maxmemory>728m</maxmemory>
+                        <minmemory>${memory.min}</minmemory>
+                        <maxmemory>${memory.max}</maxmemory>
                         <configLocation>${build-config.location}/lutece_checks.xml</configLocation>
                         <headerLocation>${build-config.location}/checkstyle-header.txt</headerLocation>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${maven-pmd-plugin.version}</version>
+                    <configuration>
+                        <minmemory>${memory.min}</minmemory>
+                        <maxmemory>${memory.max}</maxmemory>
+                        <linkXref>true</linkXref>
+                        <rulesets>
+                            <ruleset>${build-config.location}/pmd_rulesets/coupling.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/design.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/controversial.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/codesize.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/clone.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/braces.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/basic.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/finalizers.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/imports.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/logging-jakarta-commons.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/logging-java.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/migrating.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/naming.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/optimizations.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/strictexception.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/strings.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/sunsecure.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/typeresolution.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/unusedcode.xml</ruleset>
+                        </rulesets>
+                        <failsOnError>false</failsOnError>
+                        <source>${java.source.version}</source>
+                        <target>${java.source.version}</target>
+                    </configuration>
+                </plugin>   
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
