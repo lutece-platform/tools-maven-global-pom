@@ -414,14 +414,16 @@
 			
             <!-- This declaration allows redifinition of webapp path. We don't use the war plugin directly, 
             but this definition has been found useful in some cases (eg mevenide import)  -->
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
+                <version>2.5</version>
                 <configuration>
-                    <warSourceDirectory>webapp</warSourceDirectory>
+                    <warSourceDirectory>${basedir}/webapp</warSourceDirectory>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>dashboard-maven-plugin</artifactId>
@@ -528,6 +530,11 @@
             <id>lutece_snapshots_repository</id>
             <url>http://dev.lutece.paris.fr/nexus/content/repositories/lutece_snapshots_repository</url>
         </snapshotRepository>
+        
+        <site>
+            <id>lutece_ftp_site_maven</id>
+            <url>ftp://site-deploy.dev.lutece.paris.fr/site/plugins</url>
+        </site>
     </distributionManagement>
 
   
