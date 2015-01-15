@@ -8,13 +8,16 @@
     <version>3.0-SNAPSHOT</version>
    
     <properties>
+        <memory.min>128m</memory.min>
+        <memory.max>896m</memory.max>
         <targetJdk>1.7</targetJdk>
+        <java.source.version>1.7</java.source.version>
         <sonar.host.url>http://dev.lutece.paris.fr/sonar</sonar.host.url>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-site-plugin.version>3.4</maven-site-plugin.version>
-        <checkstyle-plugin.version>2.11</checkstyle-plugin.version> <!-- Pb with 2.12. 2.13 to access license header -->
-        <maven-pmd-plugin.version>3.1</maven-pmd-plugin.version>
-        <lutece.plugin.version>4.0.0-SNAPSHOT</lutece.plugin.version>
+        <maven-checkstyle-plugin.version>2.11</maven-checkstyle-plugin.version> <!-- Pb with 2.12. 2.13 to access license header -->
+        <maven-pmd-plugin.version>3.3</maven-pmd-plugin.version>
+        <maven-findbugs-plugin.version>3.0.0</maven-findbugs-plugin.version>
         <serverUrl>dev.lutece.paris.fr</serverUrl>
         <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
         <organization.logo>http://dev.lutece.paris.fr/images/banner_left.png</organization.logo>
@@ -136,6 +139,22 @@
 
         <plugins>
             <plugin>
+              <artifactId>maven-release-plugin</artifactId>
+              <version>2.5.1</version>
+              <configuration>
+                <providerImplementations>
+                  <git>jgit</git>
+                </providerImplementations>
+              </configuration>
+              <dependencies>
+                <dependency>
+                  <groupId>org.apache.maven.scm</groupId>
+                  <artifactId>maven-scm-provider-jgit</artifactId>
+                  <version>1.9.2</version>
+                </dependency>
+              </dependencies>
+            </plugin>
+            <plugin>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>${maven-site-plugin.version}</version>
                 <configuration>
@@ -143,14 +162,13 @@
                     <outputEncoding>UTF-8</outputEncoding>
                     <locales>en,fr</locales>
                     <reportPlugins>
-
-                        <plugin>
+                       <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
                             <version>2.10.1</version>
                             <configuration>
-                                <minmemory>128m</minmemory>
-                                <maxmemory>512m</maxmemory>
+                                <minmemory>${memory.min}</minmemory>
+                                <maxmemory>${memory.max}</maxmemory>
                             </configuration>
                         </plugin>
                         <plugin>
@@ -185,13 +203,13 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-project-info-reports-plugin</artifactId>
-                            <version>2.7</version>
+                            <version>2.8</version>
                             <reportSets>
                                 <reportSet>
                                     <reports>
                                         <report>index</report>
                                         <report>summary</report>
-                                       <!-- <report>dependencies</report> --> <!-- Removed in order to remove the jboss black listed repository when executing "mvn site" -->
+                                        <!-- <report>dependencies</report> --> <!-- Removed in order to remove the jboss black listed repository when executing "mvn site" -->
                                         <report>cim</report>
                                         <report>issue-tracking</report>
                                         <report>license</report>
@@ -203,13 +221,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-checkstyle-plugin</artifactId>
-                            <version>${checkstyle-plugin.version}</version>
-                            <configuration>
-                               <minmemory>128m</minmemory>
-                                <maxmemory>728m</maxmemory>
-                                <configLocation>${build-config.location}/lutece_checks.xml</configLocation>
-                                <headerLocation>${build-config.location}/checkstyle-header.txt</headerLocation>
-                            </configuration>
+                            <version>${maven-checkstyle-plugin.version}</version>
                             <reportSets>
                                 <reportSet>
                                     <reports>
@@ -218,21 +230,13 @@
                                 </reportSet>
                             </reportSets>
                         </plugin>
--->
-<!--                     Problem of ClassNotFoundException   
+                        
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-pmd-plugin</artifactId>
                             <version>${maven-pmd-plugin.version}</version>
-                            <configuration>
-                                <minmemory>128m</minmemory>
-                                <maxmemory>512m</maxmemory>
-                                <rulesets>
-                                    <ruleset>${build-config.location}/lutece_PMD.xml</ruleset>
-                                </rulesets>
-                            </configuration>
                         </plugin>
--->
+                        
 
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
@@ -260,7 +264,7 @@
                             </reportSets>
                         </plugin>
                         -->
-                       <plugin>
+                        <plugin>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>taglist-maven-plugin</artifactId>
                             <version>2.4</version>
@@ -283,7 +287,7 @@
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>findbugs-maven-plugin</artifactId>
-                            <version>3.0.0</version>
+                            <version>${maven-findbugs-plugin.version}</version>
                         </plugin>
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
@@ -302,11 +306,6 @@
                             <artifactId>maven-surefire-report-plugin</artifactId>
                             <version>2.18</version>
                         </plugin>
-                        <plugin>
-                            <groupId>org.codehaus.mojo</groupId>
-                            <artifactId>dashboard-maven-plugin</artifactId>
-                            <version>1.0.0-beta-1</version>
-                        </plugin>    
                         <plugin>
                             <groupId>org.codehaus.sonar-plugins</groupId>
                             <artifactId>maven-report</artifactId>
@@ -328,7 +327,7 @@
                 <groupId>fr.paris.lutece.tools</groupId>
                 <artifactId>lutece-maven-plugin</artifactId>
                 <extensions>true</extensions>
-                <version>${lutece.plugin.version}</version>
+                <version>[3.0.5,)</version>
                 <configuration>
                     <localConfDirectory>${localConfDirectory}</localConfDirectory>
                 </configuration>
@@ -339,8 +338,8 @@
                 <version>3.1</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>${java.source.version}</source>
+                    <target>${java.source.version}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -408,35 +407,12 @@
                 </dependencies>
             </plugin>
 			
-            <!-- This declaration allows redifinition of webapp path. We don't use the war plugin directly, 
-            but this definition has been found useful in some cases (eg mevenide import)  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
+                <version>2.5</version>
                 <configuration>
-                    <warSourceDirectory>webapp</warSourceDirectory>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>dashboard-maven-plugin</artifactId>
-                <version>1.0.0-beta-1</version>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>5.0.5</version>
-                    </dependency>
-                </dependencies>
-                <!--  configuration for dashboard history -->
-                <configuration>
-                    <dialect>org.hibernate.dialect.MySQLDialect</dialect>
-                    <driverClass>org.gjt.mm.mysql.Driver</driverClass>
-                    <connectionUrl>jdbc:mysql://localhost:3307/dashboard_history?autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=utf8</connectionUrl>
-                    <username>${dashboard.username}</username>
-                    <password>${dashboard.password}</password>				
+                    <warSourceDirectory>${basedir}/webapp</warSourceDirectory>
                 </configuration>
             </plugin>
         </plugins>
@@ -448,18 +424,52 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${checkstyle-plugin.version}</version>
+                    <version>${maven-checkstyle-plugin.version}</version>
                     <configuration>
-                        <minmemory>128m</minmemory>
-                        <maxmemory>728m</maxmemory>
+                        <minmemory>${memory.min}</minmemory>
+                        <maxmemory>${memory.max}</maxmemory>
                         <configLocation>${build-config.location}/lutece_checks.xml</configLocation>
                         <headerLocation>${build-config.location}/checkstyle-header.txt</headerLocation>
                     </configuration>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${maven-pmd-plugin.version}</version>
+                    <configuration>
+                        <minmemory>${memory.min}</minmemory>
+                        <maxmemory>${memory.max}</maxmemory>
+                        <linkXref>true</linkXref>
+                        <rulesets>
+                            <ruleset>${build-config.location}/pmd_rulesets/coupling.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/design.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/controversial.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/codesize.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/clone.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/braces.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/basic.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/finalizers.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/imports.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/logging-jakarta-commons.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/logging-java.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/migrating.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/naming.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/optimizations.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/strictexception.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/strings.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/sunsecure.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/typeresolution.xml</ruleset>
+                            <ruleset>${build-config.location}/pmd_rulesets/unusedcode.xml</ruleset>
+                        </rulesets>
+                        <failsOnError>false</failsOnError>
+                        <source>${java.source.version}</source>
+                        <target>${java.source.version}</target>
+                    </configuration>
+                </plugin>   
+                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>2.5.3</version>
+                    <version>${maven-findbugs-plugin.version}</version>
                     <configuration>
                         <xmlOutput>true</xmlOutput>
                         <threshold>Normal</threshold>
@@ -473,7 +483,7 @@
             <extension>
                 <groupId>fr.paris.lutece.tools</groupId>
                 <artifactId>build-config</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>[1.0.0,)</version>
             </extension>
         </extensions>
     </build>
@@ -490,6 +500,11 @@
             <id>lutece_snapshots_repository</id>
             <url>http://dev.lutece.paris.fr/nexus/content/repositories/lutece_snapshots_repository</url>
         </snapshotRepository>
+        
+        <site>
+            <id>lutece_ftp_site_maven</id>
+            <url>ftp://site-deploy.dev.lutece.paris.fr/site/plugins</url>
+        </site>
     </distributionManagement>
 
   
