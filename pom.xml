@@ -5,7 +5,7 @@
     <name>Lutece global pom</name>
     <url>http://dev.lutece.paris.fr/</url> 
     <packaging>pom</packaging>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
     <properties>
         <memory.min>128m</memory.min>
         <memory.max>896m</memory.max>
