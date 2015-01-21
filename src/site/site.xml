@@ -9,12 +9,12 @@
     
     <bannerLeft>
         <name>LUTECE</name>
-        <src>images/banner_left.png</src>
+        <src>http://dev.lutece.paris.fr/images/banner_left.png</src>
         <href>http://dev.lutece.paris.fr/</href>
     </bannerLeft>
     <bannerRight>
         <name>LUTECE</name>
-        <src>images/banner_right.png</src>
+        <src>http://dev.lutece.paris.fr/images/banner_right.png</src>
     </bannerRight>
     
     <custom>
