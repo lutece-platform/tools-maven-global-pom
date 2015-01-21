@@ -5,8 +5,7 @@
     <name>Lutece global pom</name>
     <url>http://dev.lutece.paris.fr/</url> 
     <packaging>pom</packaging>
-    <version>3.0</version>
-   
+    <version>3.1-SNAPSHOT</version>
     <properties>
         <memory.min>128m</memory.min>
         <memory.max>896m</memory.max>
@@ -485,6 +484,12 @@
                 <artifactId>build-config</artifactId>
                 <version>[1.0.0,)</version>
             </extension>
+            <!-- Enabling the use of FTP -->
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ftp</artifactId>
+                <version>2.6</version>
+            </extension>
         </extensions>
     </build>
 
@@ -512,7 +517,6 @@
         <connection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</developerConnection>
         <url>https://github.com/lutece-platform/tools-maven-global-pom.git</url>
-      <tag>lutece-global-pom-3.0</tag>
-  </scm>
+    </scm>
   
 </project>
