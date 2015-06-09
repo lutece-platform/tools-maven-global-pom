@@ -5,7 +5,9 @@
     <name>Lutece global pom</name>
     <url>http://dev.lutece.paris.fr/</url> 
     <packaging>pom</packaging>
-    <version>3.1-SNAPSHOT</version>
+    <version>3.0.1-SNAPSHOT</version>
+    
+    
     <properties>
         <memory.min>128m</memory.min>
         <memory.max>896m</memory.max>
@@ -17,6 +19,7 @@
         <maven-checkstyle-plugin.version>2.11</maven-checkstyle-plugin.version> <!-- Pb with 2.12. 2.13 to access license header -->
         <maven-pmd-plugin.version>3.3</maven-pmd-plugin.version>
         <maven-findbugs-plugin.version>3.0.0</maven-findbugs-plugin.version>
+        <maven-lutece-plugin.version>3.0.5</maven-lutece-plugin.version>
         <serverUrl>dev.lutece.paris.fr</serverUrl>
         <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
         <organization.logo>http://dev.lutece.paris.fr/images/banner_left.png</organization.logo>
@@ -326,7 +329,7 @@
                 <groupId>fr.paris.lutece.tools</groupId>
                 <artifactId>lutece-maven-plugin</artifactId>
                 <extensions>true</extensions>
-                <version>[3.0.5,)</version>
+                <version>${maven-lutece-plugin.version}</version>
                 <configuration>
                     <localConfDirectory>${localConfDirectory}</localConfDirectory>
                 </configuration>
@@ -517,7 +520,6 @@
         <connection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</developerConnection>
         <url>https://github.com/lutece-platform/tools-maven-global-pom.git</url>
-      <tag>lutece-global-pom-3.0</tag>
-  </scm>
+    </scm>
   
 </project>
