@@ -19,7 +19,7 @@
         <maven-checkstyle-plugin.version>2.11</maven-checkstyle-plugin.version> <!-- Pb with 2.12. 2.13 to access license header -->
         <maven-pmd-plugin.version>3.3</maven-pmd-plugin.version>
         <maven-findbugs-plugin.version>3.0.0</maven-findbugs-plugin.version>
-        <maven-lutece-plugin.version>4.0.0</maven-lutece-plugin.version>
+        <maven-lutece-plugin.version>4.0.1</maven-lutece-plugin.version>
         <serverUrl>dev.lutece.paris.fr</serverUrl>
         <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
         <organization.logo>http://dev.lutece.paris.fr/images/banner_left.png</organization.logo>
