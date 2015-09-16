@@ -20,6 +20,7 @@
         <maven-pmd-plugin.version>3.3</maven-pmd-plugin.version>
         <maven-findbugs-plugin.version>3.0.0</maven-findbugs-plugin.version>
         <maven-lutece-plugin.version>4.0.1</maven-lutece-plugin.version>
+        <maven-xdoc2md-plugin.version>1.0.0</maven-xdoc2md-plugin.version>
         <serverUrl>dev.lutece.paris.fr</serverUrl>
         <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
         <organization.logo>http://dev.lutece.paris.fr/images/banner_left.png</organization.logo>
@@ -27,6 +28,8 @@
         <github.project>lutece-platform</github.project>
         <twitter.account>LuteceFoundry</twitter.account>
         <openhub.id>7203</openhub.id>
+        <jiraProjectName>GLOBALPOM</jiraProjectName>
+        <jiraComponentId>12858</jiraComponentId>
     </properties>
 
                 
@@ -51,7 +54,7 @@
   
     <ciManagement>
         <system>continuum</system>
-        <url>http://${serverUrl}/continuum/</url>
+        <url>http://${serverUrl}/jenkins/</url>
         <notifiers>
             <notifier>
                 <type>mail</type>
@@ -333,6 +336,11 @@
                 <configuration>
                     <localConfDirectory>${localConfDirectory}</localConfDirectory>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>fr.paris.lutece.tools</groupId>
+                <artifactId>xdoc2md-maven-plugin</artifactId>
+                <version>${maven-xdoc2md-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
