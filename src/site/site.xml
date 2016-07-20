@@ -36,7 +36,7 @@
         </fluidoSkin>
     </custom>
 
-    <publishDate format="dd MMMM yyyy" position="left" />
+    <publishDate format="dd MMMM yyyy" position="right" />
     <version position="left" />
 	
     <body>
