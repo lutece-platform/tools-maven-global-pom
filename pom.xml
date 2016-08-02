@@ -465,7 +465,7 @@
       <dependency>
       <groupId>fr.paris.lutece.tools</groupId>
       <artifactId>build-config</artifactId>
-      <version>[1.0.0,)</version>
+      <version>1.0.2-SNAPSHOT</version>
     </dependency>
     </dependencies>
     </plugin>
@@ -561,7 +561,7 @@
       <extension>
 	<groupId>fr.paris.lutece.tools</groupId>
 	<artifactId>build-config</artifactId>
-	<version>[1.0.0,)</version>
+	<version>1.0.2-SNAPSHOT</version>
       </extension>
       <!-- Enabling the use of FTP -->
       <extension>
