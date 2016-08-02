@@ -526,7 +526,7 @@
 	  <artifactId>license-maven-plugin</artifactId>
 	  <version>${license-maven-plugin.version}</version> <!-- 2.6 -->
 	  <configuration>
-            <header>http://dev.lutece.paris.fr/LICENSE.TXT</header>
+            <header>${build-config.location}/LICENSE.TXT</header>
             <includes>
               <include>src/java/**/*.java</include>
             </includes>
