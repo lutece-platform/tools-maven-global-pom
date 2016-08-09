@@ -150,7 +150,7 @@
 	<configuration>
 	  <minmemory>${memory.min}</minmemory>
 	  <maxmemory>${memory.max}</maxmemory>
-	  <!--        <additionalparam>-Xdoclint:none</additionalparam> For Java8 -->
+	  <additionalparam>${javadoc.opts}</additionalparam>
 	</configuration>
       </plugin>
       <plugin>
@@ -597,5 +597,17 @@
     <url>https://github.com/lutece-platform/tools-maven-global-pom.git</url>
     <tag>HEAD</tag>
   </scm>
+
+  <profiles>
+      <profile>
+          <id>doclint-java8-disable</id>
+          <activation>
+              <jdk>[1.8,)</jdk>
+          </activation>
+          <properties>
+              <javadoc.opts>-Xdoclint:none</javadoc.opts>
+          </properties>
+      </profile>
+  </profiles>
 
 </project>
