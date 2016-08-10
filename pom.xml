@@ -43,6 +43,13 @@
     <jiraProjectName>GLOBALPOM</jiraProjectName>
     <jiraComponentId>12858</jiraComponentId>
     
+    <!-- parameters to override db.properties with dynamic parameters during the antrun:run goal -->
+    <antrun-lutece-db-properties>db.properties</antrun-lutece-db-properties>
+    <!-- by default these are not used because there are no markers in db.properties, only in db-test-*.properties -->
+    <lutece-antrun-db-host>localhost</lutece-antrun-db-host>
+    <lutece-antrun-db-name>lutece</lutece-antrun-db-name>
+    <lutece-antrun-db-user>root</lutece-antrun-db-user>
+    <lutece-antrun-db-password>motdepasse</lutece-antrun-db-password>
   </properties>
 
   
@@ -408,6 +415,13 @@
 	<version>${maven-antrun-plugin.version}</version>
 	<configuration>
 	  <tasks>
+	    <!-- replace markers in db-test-*.properties to allow command line values for tests -->
+	    <copy file="${basedir}/target/lutece/WEB-INF/conf/${antrun-lutece-db-properties}" tofile="${basedir}/target/lutece/WEB-INF/conf/db.properties" />
+	    <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_host@" value="${lutece-antrun-db-host}"/>
+	    <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_name@" value="${lutece-antrun-db-name}"/>
+	    <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_user@" value="${lutece-antrun-db-user}"/>
+	    <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_password@" value="${lutece-antrun-db-password}"/>
+	    <!-- run our main ant script -->
 	    <ant antfile="${basedir}/target/lutece/WEB-INF/sql/build.xml" dir="${basedir}/target/lutece/WEB-INF/sql/">
 	      <target name="all" />
 	    </ant>
@@ -606,6 +620,73 @@
           </activation>
           <properties>
               <javadoc.opts>-Xdoclint:none</javadoc.opts>
+          </properties>
+      </profile>
+
+      <!-- databases drivers, for tests only -->
+      <!-- Do not activate these for releases -->
+      <!-- Choose your driver during tests with one of the following: -->
+      <!--   mvn -Dlutece-test-mysql ... -->
+      <!--   mvn -Dlutece-test-hsql ... -->
+      <!--   mvn -Dlutece-test-postgresql ... -->
+      <profile>
+          <id>lutece-test-mysql</id>
+          <activation>
+              <property>
+                  <name>lutece-test-mysql</name>
+              </property>
+          </activation>
+          <dependencies>
+              <dependency>
+                  <groupId>mysql</groupId>
+                  <artifactId>mysql-connector-java</artifactId>
+                  <!-- Must be kept in sync with lutece-core src/sql/build.properties -->
+                  <version>5.1.18</version>
+                  <optional>true</optional>
+              </dependency>
+          </dependencies>
+          <properties>
+              <antrun-lutece-db-properties>db-test-mysql.properties</antrun-lutece-db-properties>
+          </properties>
+      </profile>
+      <profile>
+          <id>lutece-test-postgresql</id>
+          <activation>
+              <property>
+                  <name>lutece-test-postgresql</name>
+              </property>
+          </activation>
+          <dependencies>
+              <dependency>
+                  <groupId>postgresql</groupId>
+                  <artifactId>postgresql</artifactId>
+                  <!-- Must be kept in sync with lutece-core src/sql/build.properties -->
+                  <version>9.0-801.jdbc4</version>
+                  <optional>true</optional>
+              </dependency>
+          </dependencies>
+          <properties>
+              <antrun-lutece-db-properties>db-test-postgresql.properties</antrun-lutece-db-properties>
+          </properties>
+      </profile>
+      <profile>
+          <id>lutece-test-hsql</id>
+          <activation>
+              <property>
+                  <name>lutece-test-hsql</name>
+              </property>
+          </activation>
+          <dependencies>
+              <dependency>
+                  <groupId>org.hsqldb</groupId>
+                  <artifactId>hsqldb</artifactId>
+                  <!-- Must be kept in sync with lutece-core src/sql/build.properties -->
+                  <version>1.8.0.10</version>
+                  <optional>true</optional>
+              </dependency>
+          </dependencies>
+          <properties>
+              <antrun-lutece-db-properties>db-test-hsql.properties</antrun-lutece-db-properties>
           </properties>
       </profile>
   </profiles>
