@@ -451,17 +451,17 @@
 	        <then>
 	            <!-- No failures -->
 	            <echoxml file="${basedir}/${antrun_report_xml}">
-	                <testsuite tests="1">
-	                    <testcase classname="AntSql" name="Antrun sql" />
+	                <testsuite name="antrunsql" time="1" tests="1" errors="0" skipped="0" failures="0">
+	                    <testcase name="antrunsql" classname="antrunsql" time="1" />
 	                </testsuite>
 	            </echoxml>
 	        </then>
 	        <else>
 	            <!-- failures -->
 	            <echoxml file="${basedir}/${antrun_report_xml}">
-	                <testsuite tests="1">
-	                    <testcase classname="AntSql" name="Antrun sql">
-	                        <failure type="SqlException">${antrun_failures}</failure>
+	                <testsuite name="antrunsql" time="1" tests="1" errors="1" skipped="0" failures="0">
+	                    <testcase name="antrunsql" classname="antrunsql" time="1">
+	                        <failure type="antrunsql">${antrun_failures}</failure>
 	                    </testcase>
 	                </testsuite>
 	            </echoxml>
