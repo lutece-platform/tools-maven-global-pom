@@ -5,7 +5,7 @@
   <name>Lutece global pom</name>
   <url>http://dev.lutece.paris.fr/</url> 
   <packaging>pom</packaging>
-  <version>3.0.8-SNAPSHOT</version>
+  <version>3.0.8</version>
   
   <properties>
     <memory.min>128m</memory.min>
@@ -423,28 +423,28 @@
 	    <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_password@" value="${lutece-antrun-db-password}" />
 
 	    <!-- setup recording of our main script to generate a test report -->
-	    <property name="antrun_report_dir" value="target/surefire-reports/"/>
-	    <property name="antrun_report_basename" value="antrun_report"/>
-	    <property name="antrun_report_txt" value="${antrun_report_dir}/${antrun_report_basename}.txt"/>
-	    <mkdir dir="${basedir}/${antrun_report_dir}"/>
-	    <record name="${basedir}/${antrun_report_txt}" append="true" action="start"/>
+	    <property name="antrun_report_dir" value="target/surefire-reports/" />
+	    <property name="antrun_report_basename" value="antrun_report" />
+	    <property name="antrun_report_txt" value="${antrun_report_dir}/${antrun_report_basename}.txt" />
+	    <mkdir dir="${basedir}/${antrun_report_dir}" />
+	    <record name="${basedir}/${antrun_report_txt}" append="true" action="start" />
 	        <!-- run our main ant script -->
 	        <ant antfile="${basedir}/target/lutece/WEB-INF/sql/build.xml" dir="${basedir}/target/lutece/WEB-INF/sql/">
 	          <target name="all" />
 	        </ant>
-	    <record name="${basedir}/${antrun_report_txt}" action="stop"/>
+	    <record name="${basedir}/${antrun_report_txt}" action="stop" />
 
 	    <!-- Load recording of our main script to generate the xml report -->
-	    <loadfile srcfile="${basedir}/${antrun_report_txt}" property="antrun_failures" >
+	    <loadfile srcfile="${basedir}/${antrun_report_txt}" property="antrun_failures">
 	        <filterchain>
 	          <linecontainsregexp>
-	            <regexp pattern="Failed to execute"/>
+	            <regexp pattern="Failed to execute" />
 	          </linecontainsregexp>
 	        </filterchain>
 	    </loadfile>
 
 	    <!-- Generate xml report (Junit format) -->
-	    <property name="antrun_report_xml" value="${antrun_report_dir}/${antrun_report_basename}.xml"/>
+	    <property name="antrun_report_xml" value="${antrun_report_dir}/${antrun_report_basename}.xml" />
 	    <taskdef resource="net/sf/antcontrib/antcontrib.properties" />
 	    <if>
 	        <equals arg1="${antrun_failures}" arg2="$${antrun_failures}" />
@@ -452,7 +452,7 @@
 	            <!-- No failures -->
 	            <echoxml file="${basedir}/${antrun_report_xml}">
 	                <testsuite tests="1">
-	                    <testcase classname="AntSql" name="Antrun sql"></testcase>
+	                    <testcase classname="AntSql" name="Antrun sql" />
 	                </testsuite>
 	            </echoxml>
 	        </then>
@@ -662,7 +662,7 @@
     <connection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</connection>
     <developerConnection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</developerConnection>
     <url>https://github.com/lutece-platform/tools-maven-global-pom.git</url>
-    <tag>HEAD</tag>
+    <tag>tools-maven-global-pom-3.0.8</tag>
   </scm>
 
   <profiles>
