@@ -5,7 +5,7 @@
   <name>Lutece global pom</name>
   <url>http://dev.lutece.paris.fr/</url> 
   <packaging>pom</packaging>
-  <version>3.0.9-SNAPSHOT</version>
+  <version>3.0.9</version>
   
   <properties>
     <memory.min>128m</memory.min>
@@ -662,7 +662,7 @@
     <connection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</connection>
     <developerConnection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</developerConnection>
     <url>https://github.com/lutece-platform/tools-maven-global-pom.git</url>
-    <tag>HEAD</tag>
+    <tag>tools-maven-global-pom-3.0.9</tag>
   </scm>
 
   <profiles>
