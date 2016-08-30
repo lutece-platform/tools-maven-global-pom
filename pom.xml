@@ -32,7 +32,7 @@
     <maven-javancss-plugin.version>2.1</maven-javancss-plugin.version>
     <maven-lutece-plugin.version>4.0.2</maven-lutece-plugin.version>
     <license-maven-plugin.version>3.0.rc1</license-maven-plugin.version>
-    <maven-xdoc2md-plugin.version>1.0.0</maven-xdoc2md-plugin.version>
+    <maven-xdoc2md-plugin.version>1.0.1</maven-xdoc2md-plugin.version>
     <serverUrl>dev.lutece.paris.fr</serverUrl>
     <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
     <organization.logo>http://dev.lutece.paris.fr/images/banner_left.png</organization.logo>
