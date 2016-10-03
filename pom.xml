@@ -10,8 +10,8 @@
   <properties>
     <memory.min>128m</memory.min>
     <memory.max>896m</memory.max>
-    <targetJdk>1.7</targetJdk>
-    <java.source.version>1.7</java.source.version>
+    <targetJdk>1.8</targetJdk>
+    <java.source.version>1.8</java.source.version>
     <sonar.host.url>http://dev.lutece.paris.fr/sonar</sonar.host.url>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
