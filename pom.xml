@@ -157,7 +157,6 @@
 	<configuration>
 	  <minmemory>${memory.min}</minmemory>
 	  <maxmemory>${memory.max}</maxmemory>
-	  <additionalparam>${javadoc.opts}</additionalparam>
 	</configuration>
       </plugin>
       <plugin>
@@ -672,7 +671,7 @@
               <jdk>[1.8,)</jdk>
           </activation>
           <properties>
-              <javadoc.opts>-Xdoclint:none</javadoc.opts>
+              <additionalparam>-Xdoclint:none</additionalparam>
           </properties>
       </profile>
 
