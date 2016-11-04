@@ -704,10 +704,10 @@
           </activation>
           <dependencies>
               <dependency>
-                  <groupId>postgresql</groupId>
+                  <groupId>org.postgresql</groupId>
                   <artifactId>postgresql</artifactId>
                   <!-- Must be kept in sync with lutece-core src/sql/build.properties -->
-                  <version>9.0-801.jdbc4</version>
+                  <version>9.4.1211</version>
                   <optional>true</optional>
               </dependency>
           </dependencies>
