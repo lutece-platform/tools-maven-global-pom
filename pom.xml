@@ -20,7 +20,7 @@
     <maven-pmd-plugin.version>3.7</maven-pmd-plugin.version>
     <maven-findbugs-plugin.version>3.0.3</maven-findbugs-plugin.version>
     <maven-formatter-plugin.version>0.5.2</maven-formatter-plugin.version>
-    <maven-war-plugin.version>2.6</maven-war-plugin.version>
+    <maven-war-plugin.version>3.0.0</maven-war-plugin.version>
     <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
     <maven-cobertura-plugin.version>2.7</maven-cobertura-plugin.version>
     <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
