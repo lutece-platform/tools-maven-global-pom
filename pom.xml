@@ -52,6 +52,9 @@
     <lutece-antrun-db-password>motdepasse</lutece-antrun-db-password>
   </properties>
 
+  <prerequisites>
+     <maven>3.0.5</maven>
+  </prerequisites>
   
   <licenses>
     <license>
