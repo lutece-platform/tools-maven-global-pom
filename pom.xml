@@ -3,17 +3,31 @@
   <groupId>fr.paris.lutece.tools</groupId>
   <artifactId>lutece-global-pom</artifactId>
   <name>Lutece global pom</name>
-  <url>http://dev.lutece.paris.fr/</url> 
+  <url>http://${serverUrl}/</url> 
   <packaging>pom</packaging>
   <version>4.0.0-SNAPSHOT</version>
   
   <properties>
+    <!-- Misc build parameters -->
     <memory.min>128m</memory.min>
     <memory.max>896m</memory.max>
     <targetJdk>1.8</targetJdk>
     <java.source.version>1.8</java.source.version>
-    <sonar.host.url>http://dev.lutece.paris.fr/sonar</sonar.host.url>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Lutece specific parameters -->
+    <serverUrl>dev.lutece.paris.fr</serverUrl>
+    <sonar.host.url>http://${serverUrl}/sonar</sonar.host.url>
+    <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
+    <organization.logo>http://${serverUrl}/images/banner_left.png</organization.logo>
+    <github.project>lutece-platform</github.project>
+    <twitter.account>LuteceFoundry</twitter.account>
+    <openhub.id>7203</openhub.id>
+    <jiraProjectName>GLOBALPOM</jiraProjectName>
+    <jiraComponentId>12858</jiraComponentId>
+
+    <!-- Build dependencies versions -->
+    <maven-prerequisite.version>3.0.5</maven-prerequisite.version>
     <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
     <maven-site-plugin.version>3.5.1</maven-site-plugin.version>
     <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
@@ -29,6 +43,7 @@
     <maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
     <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
     <maven-jdepend-plugin.version>2.0</maven-jdepend-plugin.version>
+    <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
     <maven-taglist-plugin.version>2.4</maven-taglist-plugin.version>
     <maven-javancss-plugin.version>2.1</maven-javancss-plugin.version>
     <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
@@ -38,15 +53,26 @@
     <maven-lutece-plugin.version>4.0.2</maven-lutece-plugin.version>
     <license-maven-plugin.version>3.0</license-maven-plugin.version>
     <maven-xdoc2md-plugin.version>1.0.1</maven-xdoc2md-plugin.version>
-    <serverUrl>dev.lutece.paris.fr</serverUrl>
-    <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
-    <organization.logo>http://dev.lutece.paris.fr/images/banner_left.png</organization.logo>
-    <build-config.location>build-config</build-config.location> <!-- directory provided by the artifact fr.paris.lutece.tools:build-config -->
-    <github.project>lutece-platform</github.project>
-    <twitter.account>LuteceFoundry</twitter.account>
-    <openhub.id>7203</openhub.id>
-    <jiraProjectName>GLOBALPOM</jiraProjectName>
-    <jiraComponentId>12858</jiraComponentId>
+    <maven-scm-provider-jgit.version>1.9.2</maven-scm-provider-jgit.version>
+    <sonar-maven-report.version>0.1</sonar-maven-report.version>
+    <jalopy-maven-plugin.version>1.0-alpha-1</jalopy-maven-plugin.version>
+    <ant-optional.version>1.5.3-1</ant-optional.version>
+    <ant-contrib.version>1.0b3</ant-contrib.version>
+    <maven-wagon-ftp.version>2.6</maven-wagon-ftp.version>
+    <build-config.version>1.0.2-SNAPSHOT</build-config.version>
+
+    <!-- Runtime dependencies versions -->
+    <servlet-api.version>3.1.0</servlet-api.version>
+    <jsp-api.version>2.3.1</jsp-api.version>
+    <library-lutece-unit-testing.version>4.0.1</library-lutece-unit-testing.version>
+    <!-- All database connectors must be kept in sync -->
+    <!-- with lutece-core src/sql/build.properties -->
+    <mysql.version>5.1.40</mysql.version>
+    <postgresql.version>9.4.1211</postgresql.version>
+    <hsqldb.version>2.3.4</hsqldb.version>
+
+    <!-- directory provided by the artifact fr.paris.lutece.tools:build-config -->
+    <build-config.location>build-config</build-config.location>
     
     <!-- parameters to override db.properties with dynamic parameters during the antrun:run goal -->
     <antrun-lutece-db-properties>db.properties</antrun-lutece-db-properties>
@@ -58,13 +84,13 @@
   </properties>
 
   <prerequisites>
-     <maven>3.0.5</maven>
+     <maven>${maven-prerequisite.version}</maven>
   </prerequisites>
   
   <licenses>
     <license>
       <name>Lutece license</name>
-      <url>http://dev.lutece.paris.fr/LICENSE.TXT</url>
+      <url>http://${serverUrl}/LICENSE.TXT</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -132,19 +158,19 @@
     <dependency>    
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
+      <version>${servlet-api.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>javax.servlet.jsp</groupId>
       <artifactId>javax.servlet.jsp-api</artifactId>
-      <version>2.3.1</version>
+      <version>${jsp-api.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>fr.paris.lutece.plugins</groupId>
       <artifactId>library-lutece-unit-testing</artifactId>
-      <version>4.0.1</version>
+      <version>${library-lutece-unit-testing.version}</version>
       <type>jar</type>
       <scope>test</scope>
     </dependency>
@@ -166,7 +192,7 @@
 	<artifactId>maven-jxr-plugin</artifactId>
 	<version>${maven-jxr-plugin.version}</version>
 	<configuration>
-	  <outputEncoding>UTF-8</outputEncoding>
+	  <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
 	</configuration>
       </plugin>
       <plugin>
@@ -198,11 +224,46 @@
 	    </reports>
 	  </reportSet>
 	</reportSets>
+    <configuration>
+      <minmemory>${memory.min}</minmemory>
+      <maxmemory>${memory.max}</maxmemory>
+      <configLocation>${build-config.location}/lutece_checks.xml</configLocation>
+      <headerLocation>${build-config.location}/checkstyle-header.txt</headerLocation>
+    </configuration>
       </plugin>
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-pmd-plugin</artifactId>
 	<version>${maven-pmd-plugin.version}</version>
+	  <configuration>
+            <minmemory>${memory.min}</minmemory>
+            <maxmemory>${memory.max}</maxmemory>
+            <linkXref>true</linkXref>
+            <rulesets>
+              <ruleset>${build-config.location}/pmd_rulesets/coupling.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/design.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/controversial.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/codesize.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/clone.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/braces.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/basic.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/finalizers.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/imports.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/logging-jakarta-commons.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/logging-java.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/migrating.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/naming.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/optimizations.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/strictexception.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/strings.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/sunsecure.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/typeresolution.xml</ruleset>
+              <ruleset>${build-config.location}/pmd_rulesets/unusedcode.xml</ruleset>
+            </rulesets>
+            <failsOnError>false</failsOnError>
+            <source>${java.source.version}</source>
+            <target>${java.source.version}</target>
+	  </configuration>
       </plugin>
       
       
@@ -216,7 +277,7 @@
 	   <plugin>
 	   <groupId>org.apache.maven.plugins</groupId>
 	   <artifactId>maven-changelog-plugin</artifactId>
-	   <version>2.3</version>
+	   <version>${maven-changelog-plugin.version}</version>
 	   <reportSets>
 	   <reportSet>
 	   <id>dual-report</id>
@@ -256,6 +317,11 @@
 	<groupId>org.codehaus.mojo</groupId>
 	<artifactId>findbugs-maven-plugin</artifactId>
 	<version>${maven-findbugs-plugin.version}</version>
+	  <configuration>
+            <xmlOutput>true</xmlOutput>
+            <threshold>Normal</threshold>
+            <effort>Max</effort>
+	  </configuration>
       </plugin>
       <plugin>
 	<groupId>org.codehaus.mojo</groupId>
@@ -267,17 +333,24 @@
 	      <ignore>fr.paris.lutece.portal.web.constants.*</ignore>
 	    </ignores>
 	  </instrumentation>
+	  <formats>
+	    <format>html</format>
+	    <format>xml</format>
+	  </formats>
 	</configuration>
       </plugin>
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-surefire-report-plugin</artifactId>
 	<version>${maven-surefire-report-plugin.version}</version>
+	<configuration>
+	  <showSuccess>true</showSuccess>
+	</configuration>
       </plugin>
       <plugin>
 	<groupId>org.codehaus.sonar-plugins</groupId>
 	<artifactId>maven-report</artifactId>
-	<version>0.1</version>
+    <version>${sonar-maven-report.version}</version>
       </plugin>
     </plugins>
   </reporting>
@@ -308,7 +381,7 @@
 	  <dependency>
 	    <groupId>org.apache.maven.scm</groupId>
 	    <artifactId>maven-scm-provider-jgit</artifactId>
-	    <version>1.9.2</version>
+        <version>${maven-scm-provider-jgit.version}</version>
 	  </dependency>
 	</dependencies>
 
@@ -316,18 +389,9 @@
       <plugin>
 	<artifactId>maven-site-plugin</artifactId>
 	<version>${maven-site-plugin.version}</version>
-	<!--
-	    <dependencies>
-	    <dependency>
-	    <groupId>org.apache.velocity</groupId>
-	    <artifactId>velocity</artifactId>
-	    <version>1.5</version>
-	    </dependency>
-	    </dependencies>
-	-->
 	<configuration>
-	  <inputEncoding>UTF-8</inputEncoding>
-	  <outputEncoding>UTF-8</outputEncoding>
+      <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+	  <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
 	  <locales>en,fr</locales>
 	</configuration>
 
@@ -368,7 +432,7 @@
       <plugin>
 	<groupId>org.codehaus.mojo</groupId>
 	<artifactId>jalopy-maven-plugin</artifactId>
-	<version>1.0-alpha-1</version>
+    <version>${jalopy-maven-plugin.version}</version>
 	<configuration>
 	  <convention>${build-config.location}/jalopy_mdp.xml</convention>
 	</configuration>
@@ -389,25 +453,6 @@
 	      <value>target/cobertura/cobertura.ser</value>
 	    </property>
 	  </systemProperties>
-	</configuration>
-      </plugin>
-      <plugin>
-	<groupId>org.codehaus.mojo</groupId>
-	<artifactId>cobertura-maven-plugin</artifactId>
-	<version>${maven-cobertura-plugin.version}</version>
-	<configuration>
-	  <formats>
-	    <format>html</format>
-	    <format>xml</format>
-	  </formats>
-	</configuration>
-      </plugin>
-      <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-surefire-report-plugin</artifactId>
-	<version>${maven-surefire-report-plugin.version}</version>
-	<configuration>
-	  <showSuccess>true</showSuccess>
 	</configuration>
       </plugin>
       <plugin>
@@ -474,12 +519,12 @@
 	  <dependency>
 	    <groupId>ant</groupId>
 	    <artifactId>ant-optional</artifactId>
-	    <version>1.5.3-1</version>
+	    <version>${ant-optional.version}</version>
 	  </dependency>
 	  <dependency>
 	    <groupId>ant-contrib</groupId>
 	    <artifactId>ant-contrib</artifactId>
-	    <version>1.0b3</version>
+	    <version>${ant-contrib.version}</version>
 	    <exclusions>
 	      <exclusion>
 	        <groupId>ant</groupId>
@@ -502,18 +547,56 @@
 	<groupId>net.revelc.code</groupId>
 	<artifactId>formatter-maven-plugin</artifactId>
 	<version>${maven-formatter-plugin.version}</version>
+	<configuration>
+          <configFile>${build-config.location}/lutece_formatter.xml</configFile>
+	</configuration>
       </plugin>
 
       <plugin>
         <groupId>com.mycila</groupId>
         <artifactId>license-maven-plugin</artifactId>
-        <version>${license-maven-plugin.version}</version> <!-- 2.6 -->
+        <version>${license-maven-plugin.version}</version>
+        <configuration>
+          <header>${build-config.location}/LICENSE.TXT</header>
+          <includes>
+            <include>src/java/**/*.java</include>
+          </includes>
+          <mapping>
+            <java>slashstar_style</java>
+          </mapping>
+          <quiet>true</quiet>
+          <failIfMissing>false</failIfMissing>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+        <executions>
+          <execution>
+            <id>check-license</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>process-sources</phase>
+          </execution>
+          <execution>
+            <id>default-cli</id>
+            <configuration>
+              <quiet>false</quiet>
+              <failIfMissing>true</failIfMissing>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-checkstyle-plugin</artifactId>
 	<version>${maven-checkstyle-plugin.version}</version>
+    <dependencies>
+      <dependency>
+      <groupId>fr.paris.lutece.tools</groupId>
+      <artifactId>build-config</artifactId>
+      <version>${build-config.version}</version>
+    </dependency>
+    </dependencies>
       </plugin>
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
@@ -532,125 +615,20 @@
       </plugin>
     </plugins>
     
-    <pluginManagement>
-      <plugins>
-	<plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-checkstyle-plugin</artifactId>
-      <version>${maven-checkstyle-plugin.version}</version>
-      <configuration>
-      <minmemory>${memory.min}</minmemory>
-      <maxmemory>${memory.max}</maxmemory>
-      <configLocation>${build-config.location}/lutece_checks.xml</configLocation>
-      <headerLocation>${build-config.location}/checkstyle-header.txt</headerLocation>
-    </configuration>
-      <dependencies>
-      <dependency>
-      <groupId>fr.paris.lutece.tools</groupId>
-      <artifactId>build-config</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
-    </dependency>
-    </dependencies>
-    </plugin>
-      <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	  <artifactId>maven-pmd-plugin</artifactId>
-	  <version>${maven-pmd-plugin.version}</version>
-	  <configuration>
-            <minmemory>${memory.min}</minmemory>
-            <maxmemory>${memory.max}</maxmemory>
-            <linkXref>true</linkXref>
-            <rulesets>
-              <ruleset>${build-config.location}/pmd_rulesets/coupling.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/design.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/controversial.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/codesize.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/clone.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/braces.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/basic.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/finalizers.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/imports.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/logging-jakarta-commons.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/logging-java.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/migrating.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/naming.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/optimizations.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/strictexception.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/strings.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/sunsecure.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/typeresolution.xml</ruleset>
-              <ruleset>${build-config.location}/pmd_rulesets/unusedcode.xml</ruleset>
-            </rulesets>
-            <failsOnError>false</failsOnError>
-            <source>${java.source.version}</source>
-            <target>${java.source.version}</target>
-	  </configuration>
-	</plugin>   
-	<plugin>
-	  <groupId>org.codehaus.mojo</groupId>
-	  <artifactId>findbugs-maven-plugin</artifactId>
-	  <version>${maven-findbugs-plugin.version}</version>
-	  <configuration>
-            <xmlOutput>true</xmlOutput>
-            <threshold>Normal</threshold>
-            <effort>Max</effort>
-	  </configuration>
-	</plugin>
-	<plugin>
-	  <groupId>net.revelc.code</groupId>
-	  <artifactId>formatter-maven-plugin</artifactId>
-	  <version>${maven-formatter-plugin.version}</version>
-	  <configuration>
-            <configFile>${build-config.location}/lutece_formatter.xml</configFile>
-	  </configuration>                
-	</plugin>
-	<plugin>
-	  <groupId>com.mycila</groupId>
-	  <artifactId>license-maven-plugin</artifactId>
-	  <version>${license-maven-plugin.version}</version> <!-- 2.6 -->
-	  <configuration>
-            <header>${build-config.location}/LICENSE.TXT</header>
-            <includes>
-              <include>src/java/**/*.java</include>
-            </includes>
-            <mapping>
-              <java>slashstar_style</java>
-            </mapping>
-            <quiet>true</quiet>
-            <failIfMissing>false</failIfMissing>
-            <encoding>UTF-8</encoding>
-	  </configuration>
-	  <executions>
-            <execution>
-              <id>check-license</id>
-              <goals>
-		<goal>check</goal>
-              </goals>
-              <phase>process-sources</phase>
-            </execution>
-	    <execution>
-	      <id>default-cli</id>
-              <configuration>
-                <quiet>false</quiet>
-                <failIfMissing>true</failIfMissing>
-              </configuration>
-	    </execution>
-	  </executions>
-	</plugin>
-      </plugins>
-    </pluginManagement>
-
     <extensions>
+      <!-- Adding the build-config jar containing misc files to the classpath -->
+      <!-- used by different plugins, like checkstyle, pmd, jalopy, formatter, license -->
+      <!-- It is unclear what plugins actually need this (at least license) but it doesn't hurt -->
       <extension>
 	<groupId>fr.paris.lutece.tools</groupId>
 	<artifactId>build-config</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>${build-config.version}</version>
       </extension>
       <!-- Enabling the use of FTP -->
       <extension>
 	<groupId>org.apache.maven.wagon</groupId>
 	<artifactId>wagon-ftp</artifactId>
-	<version>2.6</version>
+	<version>${maven-wagon-ftp.version}</version>
       </extension>
     </extensions>
   </build>
@@ -659,18 +637,18 @@
   <distributionManagement>
     <repository>
       <id>lutece_releases_repository</id>
-      <url>http://dev.lutece.paris.fr/nexus/content/repositories/lutece_releases_repository</url>
+      <url>http://${serverUrl}/nexus/content/repositories/lutece_releases_repository</url>
     </repository>
     
     <snapshotRepository>
       <uniqueVersion>true</uniqueVersion>
       <id>lutece_snapshots_repository</id>
-      <url>http://dev.lutece.paris.fr/nexus/content/repositories/lutece_snapshots_repository</url>
+      <url>http://${serverUrl}/nexus/content/repositories/lutece_snapshots_repository</url>
     </snapshotRepository>
     
     <site>
       <id>lutece_ftp_site_maven</id>
-      <url>ftp://site-deploy.dev.lutece.paris.fr/site/plugins</url>
+      <url>ftp://site-deploy.${serverUrl}/site/plugins</url>
     </site>
   </distributionManagement>
 
@@ -710,7 +688,7 @@
                   <groupId>mysql</groupId>
                   <artifactId>mysql-connector-java</artifactId>
                   <!-- Must be kept in sync with lutece-core src/sql/build.properties -->
-                  <version>5.1.40</version>
+                  <version>${mysql.version}</version>
                   <optional>true</optional>
               </dependency>
           </dependencies>
@@ -729,8 +707,7 @@
               <dependency>
                   <groupId>org.postgresql</groupId>
                   <artifactId>postgresql</artifactId>
-                  <!-- Must be kept in sync with lutece-core src/sql/build.properties -->
-                  <version>9.4.1211</version>
+                  <version>${postgresql.version}</version>
                   <optional>true</optional>
               </dependency>
           </dependencies>
@@ -749,8 +726,7 @@
               <dependency>
                   <groupId>org.hsqldb</groupId>
                   <artifactId>hsqldb</artifactId>
-                  <!-- Must be kept in sync with lutece-core src/sql/build.properties -->
-                  <version>2.3.4</version>
+                  <version>${hsqldb.version}</version>
                   <optional>true</optional>
               </dependency>
           </dependencies>
