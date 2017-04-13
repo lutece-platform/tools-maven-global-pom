@@ -440,6 +440,7 @@
             <exclude>**/MainTest.java</exclude>
             <exclude>**/TestRunner.java</exclude>
             <exclude>**/LuteceTestCase.java</exclude>
+            <exclude>**/AllTests.java</exclude>
           </excludes>
           <systemProperties>
             <property>
