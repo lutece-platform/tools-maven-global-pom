@@ -553,6 +553,7 @@
           <header>${build-config.location}/LICENSE.TXT</header>
           <includes>
             <include>src/java/**/*.java</include>
+            <include>src/test/java/**/*.java</include>
           </includes>
           <mapping>
             <java>slashstar_style</java>
