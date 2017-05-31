@@ -5,7 +5,7 @@
   <name>Lutece global pom</name>
   <url>http://${serverUrl}/</url>
   <packaging>pom</packaging>
-  <version>4.0.1-SNAPSHOT</version>
+  <version>4.0.1</version>
 
   <properties>
     <!-- Misc build parameters -->
@@ -648,7 +648,7 @@
     <connection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</connection>
     <developerConnection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</developerConnection>
     <url>https://github.com/lutece-platform/tools-maven-global-pom.git</url>
-    <tag>HEAD</tag>
+    <tag>tools-maven-global-pom-4.0.1</tag>
   </scm>
 
   <profiles>
