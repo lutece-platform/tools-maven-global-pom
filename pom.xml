@@ -203,7 +203,7 @@
             <reports>
               <report>index</report>
               <report>summary</report>
-              <!-- <report>dependencies</report> --> <!-- Removed in order to remove the jboss black listed repository when executing "mvn site" -->
+              <report>dependencies</report>
               <report>cim</report>
               <report>issue-tracking</report>
               <report>license</report>
@@ -211,6 +211,9 @@
             </reports>
           </reportSet>
         </reportSets>
+        <configuration>
+            <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
