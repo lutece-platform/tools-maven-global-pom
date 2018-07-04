@@ -597,6 +597,12 @@
             <version>${build-config.version}</version>
           </dependency>
         </dependencies>
+        <configuration>
+          <minmemory>${memory.min}</minmemory>
+          <maxmemory>${memory.max}</maxmemory>
+          <configLocation>${build-config.location}/lutece_checks.xml</configLocation>
+          <headerLocation>${build-config.location}/checkstyle-header.txt</headerLocation>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -612,6 +618,115 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
         <version>${maven-deploy-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven-javadoc-plugin.version}</version>
+        <configuration>
+          <minmemory>${memory.min}</minmemory>
+          <maxmemory>${memory.max}</maxmemory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>${maven-jxr-plugin.version}</version>
+        <configuration>
+          <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>${maven-project-info-reports-plugin.version}</version>
+        <configuration>
+            <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>${maven-pmd-plugin.version}</version>
+        <configuration>
+          <minmemory>${memory.min}</minmemory>
+          <maxmemory>${memory.max}</maxmemory>
+          <linkXref>true</linkXref>
+          <rulesets>
+            <ruleset>${build-config.location}/pmd_rulesets/coupling.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/design.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/controversial.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/codesize.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/clone.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/braces.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/basic.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/finalizers.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/imports.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/logging-jakarta-commons.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/logging-java.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/migrating.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/naming.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/optimizations.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/strictexception.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/strings.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/sunsecure.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/typeresolution.xml</ruleset>
+            <ruleset>${build-config.location}/pmd_rulesets/unusedcode.xml</ruleset>
+          </rulesets>
+          <failsOnError>false</failsOnError>
+          <source>${java.source.version}</source>
+          <target>${java.source.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jdepend-maven-plugin</artifactId>
+        <version>${maven-jdepend-plugin.version}</version>
+      </plugin>
+      <!-- Build fails Error parsing changelog.xml : An invalid XML character (Unicode: 0x1b) was found in the CDATA section.
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-changelog-plugin</artifactId>
+         <version>${maven-changelog-plugin.version}</version>
+      </plugin>
+      -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>taglist-maven-plugin</artifactId>
+        <version>${maven-taglist-plugin.version}</version>
+        <configuration>
+          <tags>
+            <tag>TODO</tag>
+            <tag>FIXME</tag>
+            <tag>@todo</tag>
+            <tag>@deprecated</tag>
+            <tag>DOCUMENT_ME</tag>
+            <tag>NOT_YET_DOCUMENTED</tag>
+          </tags>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>${maven-findbugs-plugin.version}</version>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <threshold>Normal</threshold>
+          <effort>Max</effort>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>${maven-surefire-report-plugin.version}</version>
+        <configuration>
+          <showSuccess>true</showSuccess>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.sonar-plugins</groupId>
+        <artifactId>maven-report</artifactId>
+        <version>${sonar-maven-report.version}</version>
       </plugin>
     </plugins>
 
