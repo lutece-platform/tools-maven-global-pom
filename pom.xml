@@ -513,6 +513,53 @@
 	<artifactId>maven-checkstyle-plugin</artifactId>
 	<version>${maven-checkstyle-plugin.version}</version>
       </plugin>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-javadoc-plugin</artifactId>
+	<version>${maven-javadoc-plugin.version}</version>
+	<configuration>
+	  <minmemory>${memory.min}</minmemory>
+	  <maxmemory>${memory.max}</maxmemory>
+	</configuration>
+      </plugin>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-jxr-plugin</artifactId>
+	<version>${maven-jxr-plugin.version}</version>
+	<configuration>
+	  <outputEncoding>UTF-8</outputEncoding>
+	</configuration>
+      </plugin>
+      <plugin>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>jdepend-maven-plugin</artifactId>
+	<version>${maven-jdepend-plugin.version}</version>
+      </plugin>
+      <plugin>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>taglist-maven-plugin</artifactId>
+	<version>${maven-taglist-plugin.version}</version>
+	<configuration>
+	  <tags>
+	    <tag>TODO</tag>
+	    <tag>FIXME</tag>
+	    <tag>@todo</tag>
+	    <tag>@deprecated</tag>
+	    <tag>DOCUMENT_ME</tag>
+	    <tag>NOT_YET_DOCUMENTED</tag>
+	  </tags>
+	</configuration>
+      </plugin>
+      <plugin>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>javancss-maven-plugin</artifactId>
+	<version>${maven-javancss-plugin.version}</version>
+      </plugin>
+      <plugin>
+	<groupId>org.codehaus.sonar-plugins</groupId>
+	<artifactId>maven-report</artifactId>
+	<version>0.1</version>
+      </plugin>
     </plugins>
     
     <pluginManagement>
