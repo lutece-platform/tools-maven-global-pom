@@ -36,10 +36,10 @@
     <maven-formatter-plugin.version>0.5.2</maven-formatter-plugin.version>
     <maven-war-plugin.version>3.0.0</maven-war-plugin.version>
     <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-    <maven-jacoco-plugin.version>0.7.9</maven-jacoco-plugin.version>
+    <maven-jacoco-plugin.version>0.8.4</maven-jacoco-plugin.version>
     <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
-    <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
-    <maven-surefire-report-plugin.version>2.20</maven-surefire-report-plugin.version>
+    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+    <maven-surefire-report-plugin.version>2.22.2</maven-surefire-report-plugin.version>
     <maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
     <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
     <maven-jdepend-plugin.version>2.0</maven-jdepend-plugin.version>
