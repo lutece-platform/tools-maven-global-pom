@@ -27,7 +27,7 @@
         <jiraComponentId>12858</jiraComponentId>
 
         <!-- Build dependencies versions -->
-        <maven-prerequisite.version>3.0.5</maven-prerequisite.version>
+        <maven-prerequisite.version>3.3.9</maven-prerequisite.version>
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
         <maven-site-plugin.version>3.8.2</maven-site-plugin.version>
         <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
@@ -49,6 +49,7 @@
         <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+<!--        <maven-owasp-plugin.version>5.2.1</maven-owasp-plugin.version>-->
         <maven-lutece-plugin.version>4.0.3</maven-lutece-plugin.version>
         <lutece-maven-report.version>1.0.0-SNAPSHOT</lutece-maven-report.version>
         <license-maven-plugin.version>2.0.0</license-maven-plugin.version>
@@ -324,6 +325,20 @@
                 <artifactId>license-maven-plugin</artifactId>
                 <version>${license-maven-plugin.version}</version>
             </plugin>
+
+            <!--          OWASP             -->
+<!--           <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>${maven-owasp-plugin.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>-->
 
             <!--       LUTECE        -->
             <plugin>
