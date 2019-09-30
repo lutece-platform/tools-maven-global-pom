@@ -17,7 +17,6 @@
 
         <!-- Lutece specific parameters -->
         <serverUrl>dev.lutece.paris.fr</serverUrl>
-        <sonar.host.url>http://${serverUrl}/sonar</sonar.host.url>
         <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
         <organization.logo>http://${serverUrl}/images/banner_left.png</organization.logo>
         <github.project>lutece-platform</github.project>
@@ -81,6 +80,12 @@
         <lutece-antrun-db-name>lutece</lutece-antrun-db-name>
         <lutece-antrun-db-user>root</lutece-antrun-db-user>
         <lutece-antrun-db-password>motdepasse</lutece-antrun-db-password>
+        
+        <!-- Sonar parameters-->
+        <sonar.host.url>http://${serverUrl}/sonar</sonar.host.url>
+        <sonar.sources>pom.xml,src/java,webapp</sonar.sources>
+        <sonar.tests>src/test</sonar.tests>
+
     </properties>
 
     <prerequisites>
