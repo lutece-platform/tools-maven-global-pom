@@ -48,7 +48,7 @@
         <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
-<!--        <maven-owasp-plugin.version>5.2.1</maven-owasp-plugin.version>-->
+        <!--        <maven-owasp-plugin.version>5.2.1</maven-owasp-plugin.version>-->
         <maven-lutece-plugin.version>4.0.3</maven-lutece-plugin.version>
         <lutece-maven-report.version>1.0.0-SNAPSHOT</lutece-maven-report.version>
         <license-maven-plugin.version>2.0.0</license-maven-plugin.version>
@@ -85,7 +85,9 @@
         <sonar.host.url>http://${serverUrl}/sonar</sonar.host.url>
         <sonar.sources>pom.xml,src/java,webapp</sonar.sources>
         <sonar.tests>src/test</sonar.tests>
-
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
     </properties>
 
     <prerequisites>
@@ -332,7 +334,7 @@
             </plugin>
 
             <!--          OWASP             -->
-<!--           <plugin>
+            <!--           <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>${maven-owasp-plugin.version}</version>
@@ -376,8 +378,20 @@
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
+                        <phase>initialize</phase>
                         <goals>
                             <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <propertyName>jacoco.agent.argLine</propertyName>
+                            <destFile>target/jacoco.exec</destFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -444,19 +458,15 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <forkCount>0</forkCount>
+                    <forkCount>1</forkCount>
+                    <reuseForks>true</reuseForks>
+                    <argLine>${jacoco.agent.argLine}</argLine>
                     <excludes>
                         <exclude>**/MainTest.java</exclude>
                         <exclude>**/TestRunner.java</exclude>
                         <exclude>**/LuteceTestCase.java</exclude>
                         <exclude>**/AllTests.java</exclude>
                     </excludes>
-                    <systemProperties>
-                        <property>
-                            <name>net.sourceforge.cobertura.datafile</name>
-                            <value>target/cobertura/cobertura.ser</value>
-                        </property>
-                    </systemProperties>
                 </configuration>
             </plugin>
             <plugin>
