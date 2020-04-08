@@ -5,7 +5,7 @@
     <name>Lutece global pom</name>
     <url>http://${serverUrl}/</url>
     <packaging>pom</packaging>
-    <version>5.0.2-SNAPSHOT</version>
+    <version>5.0.3-SNAPSHOT</version>
 
     <properties>
         <!-- Misc build parameters -->
@@ -184,18 +184,6 @@
 
     <reporting>
         <plugins>
-            <!--    JAVADOC       -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
-                <configuration>
-                    <show>public</show>
-                    <doclint>none</doclint>
-                    <minmemory>${memory.min}</minmemory>
-                    <maxmemory>${memory.max}</maxmemory>
-                </configuration>
-            </plugin>
             <!--    JXR       -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -365,6 +353,20 @@
         </resources>
 
         <plugins>
+            <!--    JAVADOC       -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <show>public</show>
+                    <minmemory>${memory.min}</minmemory>
+                    <maxmemory>${memory.max}</maxmemory>
+                    <additionalOptions>
+                        <additionalOption>-Xdoclint:none</additionalOption>
+                    </additionalOptions>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
