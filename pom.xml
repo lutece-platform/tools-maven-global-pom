@@ -5,7 +5,7 @@
     <name>Lutece global pom</name>
     <url>http://${serverUrl}/</url>
     <packaging>pom</packaging>
-    <version>5.0.4-SNAPSHOT</version>
+    <version>5.1.0-SNAPSHOT</version>
 
     <properties>
         <!-- Misc build parameters -->
@@ -48,8 +48,7 @@
         <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
-        <!--        <maven-owasp-plugin.version>5.2.1</maven-owasp-plugin.version>-->
-        <maven-lutece-plugin.version>4.0.3</maven-lutece-plugin.version>
+        <maven-lutece-plugin.version>4.1.0</maven-lutece-plugin.version>
         <lutece-maven-report.version>1.0.0-SNAPSHOT</lutece-maven-report.version>
         <license-maven-plugin.version>3.0</license-maven-plugin.version>
         <maven-xdoc2md-plugin.version>1.0.2-SNAPSHOT</maven-xdoc2md-plugin.version>
@@ -179,6 +178,12 @@
             <version>${library-lutece-unit-testing.version}</version>
             <type>jar</type>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>fr.paris.lutece.tools</groupId>
+            <artifactId>build-config</artifactId>
+            <version>${build-config.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -315,19 +320,6 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-            <!--          OWASP             -->
-            <!--           <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>${maven-owasp-plugin.version}</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>aggregate</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>-->
 
             <!--       LUTECE        -->
             <plugin>
@@ -335,7 +327,6 @@
                 <artifactId>lutece-report-maven-plugin</artifactId>
                 <version>${lutece-maven-report.version}</version>
             </plugin>
-           
         </plugins>
     </reporting>
 
@@ -473,7 +464,7 @@
                 <configuration>
                     <tasks>
                         <!-- replace markers in db-test-*.properties to allow command line values for tests -->
-                        <copy file="${basedir}/target/lutece/WEB-INF/conf/${antrun-lutece-db-properties}" tofile="${basedir}/target/lutece/WEB-INF/conf/db.properties" overwrite="true" />
+                        <copy file="${basedir}/target/lutece/WEB-INF/sql/conf/${antrun-lutece-db-properties}" tofile="${basedir}/target/lutece/WEB-INF/conf/db.properties" overwrite="true" />
                         <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_host@" value="${lutece-antrun-db-host}" />
                         <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_name@" value="${lutece-antrun-db-name}" />
                         <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_user@" value="${lutece-antrun-db-user}" />
@@ -486,6 +477,7 @@
                         <mkdir dir="${basedir}/${antrun_report_dir}" />
                         <record name="${basedir}/${antrun_report_txt}" append="true" action="start" />
                         <!-- run our main ant script -->
+                        
                         <ant antfile="${basedir}/target/lutece/WEB-INF/sql/build.xml" dir="${basedir}/target/lutece/WEB-INF/sql/">
                             <target name="all" />
                         </ant>
