@@ -15,6 +15,9 @@
         <java.source.version>1.8</java.source.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <!-- Directory -->
+        <explodedDirectory>lutece</explodedDirectory>
+
         <!-- Lutece specific parameters -->
         <serverUrl>dev.lutece.paris.fr</serverUrl>
         <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
@@ -471,11 +474,11 @@
                                 <equals arg1="${antrun-lutece-db-properties}" arg2="db.properties" />
                             </not>
                             <then>
-                                <copy file="${basedir}/target/lutece/WEB-INF/sql/conf/${antrun-lutece-db-properties}" tofile="${basedir}/target/lutece/WEB-INF/conf/db.properties" overwrite="true" />
-                                <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_host@" value="${lutece-antrun-db-host}" />
-                                <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_name@" value="${lutece-antrun-db-name}" />
-                                <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_user@" value="${lutece-antrun-db-user}" />
-                                <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_password@" value="${lutece-antrun-db-password}" />
+                                <copy file="${basedir}/target/${explodedDirectory}/WEB-INF/sql/conf/${antrun-lutece-db-properties}" tofile="${basedir}/target/${explodedDirectory}/WEB-INF/conf/db.properties" overwrite="true" />
+                                <replace file="${basedir}/target/${explodedDirectory}/WEB-INF/conf/db.properties" token="@lutece_antrun_db_host@" value="${lutece-antrun-db-host}" />
+                                <replace file="${basedir}/target/${explodedDirectory}/WEB-INF/conf/db.properties" token="@lutece_antrun_db_name@" value="${lutece-antrun-db-name}" />
+                                <replace file="${basedir}/target/${explodedDirectory}/WEB-INF/conf/db.properties" token="@lutece_antrun_db_user@" value="${lutece-antrun-db-user}" />
+                                <replace file="${basedir}/target/${explodedDirectory}/WEB-INF/conf/db.properties" token="@lutece_antrun_db_password@" value="${lutece-antrun-db-password}" />
                             </then>
                         </if>
 
@@ -487,7 +490,7 @@
                         <record name="${basedir}/${antrun_report_txt}" append="true" action="start" />
                         <!-- run our main ant script -->
                         
-                        <ant antfile="${basedir}/target/lutece/WEB-INF/sql/build.xml" dir="${basedir}/target/lutece/WEB-INF/sql/">
+                        <ant antfile="${basedir}/target/${explodedDirectory}/WEB-INF/sql/build.xml" dir="${basedir}/target/${explodedDirectory}/WEB-INF/sql/">
                             <target name="all" />
                         </ant>
                         <record name="${basedir}/${antrun_report_txt}" action="stop" />
