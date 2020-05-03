@@ -463,12 +463,21 @@
                 <version>${maven-antrun-plugin.version}</version>
                 <configuration>
                     <tasks>
+                        <taskdef resource="net/sf/antcontrib/antcontrib.properties" />
+
                         <!-- replace markers in db-test-*.properties to allow command line values for tests -->
-                        <copy file="${basedir}/target/lutece/WEB-INF/sql/conf/${antrun-lutece-db-properties}" tofile="${basedir}/target/lutece/WEB-INF/conf/db.properties" overwrite="true" />
-                        <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_host@" value="${lutece-antrun-db-host}" />
-                        <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_name@" value="${lutece-antrun-db-name}" />
-                        <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_user@" value="${lutece-antrun-db-user}" />
-                        <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_password@" value="${lutece-antrun-db-password}" />
+                        <if>
+                            <not>
+                                <equals arg1="${antrun-lutece-db-properties}" arg2="db.properties" />
+                            </not>
+                            <then>
+                                <copy file="${basedir}/target/lutece/WEB-INF/sql/conf/${antrun-lutece-db-properties}" tofile="${basedir}/target/lutece/WEB-INF/conf/db.properties" overwrite="true" />
+                                <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_host@" value="${lutece-antrun-db-host}" />
+                                <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_name@" value="${lutece-antrun-db-name}" />
+                                <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_user@" value="${lutece-antrun-db-user}" />
+                                <replace file="${basedir}/target/lutece/WEB-INF/conf/db.properties" token="@lutece_antrun_db_password@" value="${lutece-antrun-db-password}" />
+                            </then>
+                        </if>
 
                         <!-- setup recording of our main script to generate a test report -->
                         <property name="antrun_report_dir" value="target/surefire-reports/" />
@@ -494,7 +503,6 @@
 
                         <!-- Generate xml report (Junit format) -->
                         <property name="antrun_report_xml" value="${antrun_report_dir}/${antrun_report_basename}.xml" />
-                        <taskdef resource="net/sf/antcontrib/antcontrib.properties" />
                         <if>
                             <equals arg1="${antrun_failures}" arg2="$${antrun_failures}" />
                             <then>
