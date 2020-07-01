@@ -68,7 +68,7 @@
         <library-lutece-unit-testing.version>4.1.0</library-lutece-unit-testing.version>
         <!-- All database connectors must be kept in sync -->
         <!-- with lutece-core src/sql/build.properties -->
-        <mysql.version>5.1.47</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <postgresql.version>9.4.1211</postgresql.version>
         <hsqldb.version>2.3.4</hsqldb.version>
 
