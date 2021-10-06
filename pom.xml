@@ -53,7 +53,7 @@
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
         <maven-lutece-plugin.version>4.1.0</maven-lutece-plugin.version>
         <lutece-maven-report.version>1.0.0-SNAPSHOT</lutece-maven-report.version>
-        <license-maven-plugin.version>3.0</license-maven-plugin.version>
+        <license-maven-plugin.version>4.1</license-maven-plugin.version>
         <maven-xdoc2md-plugin.version>1.0.2-SNAPSHOT</maven-xdoc2md-plugin.version>
         <maven-scm-provider-jgit.version>1.9.2</maven-scm-provider-jgit.version>
         <sonar-maven-report.version>0.1</sonar-maven-report.version>
