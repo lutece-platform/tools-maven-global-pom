@@ -102,7 +102,7 @@
     <licenses>
         <license>
             <name>Lutece license</name>
-            <url>http://${serverUrl}/LICENSE.TXT</url>
+            <url>https://${serverUrl}/LICENSE.TXT</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -134,7 +134,7 @@
         <repository>
             <id>lutece</id>
             <name>luteceRepository</name>
-            <url>http://${serverUrl}/maven_repository</url>
+            <url>https://${serverUrl}/maven_repository</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -142,7 +142,7 @@
         <repository>
             <id>luteceSnapshot</id>
             <name>luteceSnapshot</name>
-            <url>http://${serverUrl}/snapshot_repository</url>
+            <url>https://${serverUrl}/snapshot_repository</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -153,12 +153,12 @@
         <pluginRepository>
             <id>lutece</id>
             <name>luteceRepository</name>
-            <url>http://${serverUrl}/maven_repository</url>
+            <url>https://${serverUrl}/maven_repository</url>
         </pluginRepository>
         <pluginRepository>
             <id>luteceSnapshot</id>
             <name>luteceSnapshot</name>
-            <url>http://${serverUrl}/snapshot_repository</url>
+            <url>https://${serverUrl}/snapshot_repository</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -655,13 +655,13 @@
     <distributionManagement>
         <repository>
             <id>lutece_releases_repository</id>
-            <url>http://${serverUrl}/nexus/content/repositories/lutece_releases_repository</url>
+            <url>https://${serverUrl}/nexus/content/repositories/lutece_releases_repository</url>
         </repository>
 
         <snapshotRepository>
             <uniqueVersion>true</uniqueVersion>
             <id>lutece_snapshots_repository</id>
-            <url>http://${serverUrl}/nexus/content/repositories/lutece_snapshots_repository</url>
+            <url>https://${serverUrl}/nexus/content/repositories/lutece_snapshots_repository</url>
         </snapshotRepository>
 
         <site>
