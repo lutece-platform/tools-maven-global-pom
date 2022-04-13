@@ -5,7 +5,7 @@
     <name>Lutece global pom</name>
     <url>http://${serverUrl}/</url>
     <packaging>pom</packaging>
-    <version>5.2.2-SNAPSHOT</version>
+    <version>5.2.2</version>
 
     <properties>
         <!-- Misc build parameters -->
