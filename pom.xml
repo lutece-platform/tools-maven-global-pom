@@ -3,9 +3,9 @@
     <groupId>fr.paris.lutece.tools</groupId>
     <artifactId>lutece-global-pom</artifactId>
     <name>Lutece global pom</name>
-    <url>http://${serverUrl}/</url>
+    <url>https://${serverUrl}/</url>
     <packaging>pom</packaging>
-    <version>5.1.1</version>
+    <version>5.1.2-SNAPSHOT</version>
 
     <properties>
         <!-- Misc build parameters -->
@@ -20,8 +20,8 @@
 
         <!-- Lutece specific parameters -->
         <serverUrl>dev.lutece.paris.fr</serverUrl>
-        <jiraBaseUrl>http://${serverUrl}/jira</jiraBaseUrl>
-        <organization.logo>http://${serverUrl}/images/banner_left.png</organization.logo>
+        <jiraBaseUrl>https://${serverUrl}/jira</jiraBaseUrl>
+        <organization.logo>https://${serverUrl}/images/banner_left.png</organization.logo>
         <github.project>lutece-platform</github.project>
         <twitter.account>LuteceFoundry</twitter.account>
         <openhub.id>7203</openhub.id>
@@ -84,7 +84,7 @@
         <lutece-antrun-db-password>motdepasse</lutece-antrun-db-password>
         
         <!-- Sonar parameters-->
-        <sonar.host.url>http://${serverUrl}/sonar</sonar.host.url>
+        <sonar.host.url>https://${serverUrl}/sonar</sonar.host.url>
         <sonar.sources>pom.xml,src/java,webapp</sonar.sources>
         <sonar.tests>src/test</sonar.tests>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
@@ -99,14 +99,14 @@
     <licenses>
         <license>
             <name>Lutece license</name>
-            <url>http://${serverUrl}/LICENSE.TXT</url>
+            <url>https://${serverUrl}/LICENSE.TXT</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
     <organization>
         <name>City of Paris</name>
-        <url>http://lutece.paris.fr</url>
+        <url>https://lutece.paris.fr</url>
     </organization>
 
     <issueManagement>
@@ -116,7 +116,7 @@
 
     <ciManagement>
         <system>continuum</system>
-        <url>http://${serverUrl}/jenkins/</url>
+        <url>https://${serverUrl}/jenkins/</url>
         <notifiers>
             <notifier>
                 <type>mail</type>
@@ -131,7 +131,7 @@
         <repository>
             <id>lutece</id>
             <name>luteceRepository</name>
-            <url>http://${serverUrl}/maven_repository</url>
+            <url>https://${serverUrl}/maven_repository</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -139,7 +139,7 @@
         <repository>
             <id>luteceSnapshot</id>
             <name>luteceSnapshot</name>
-            <url>http://${serverUrl}/snapshot_repository</url>
+            <url>https://${serverUrl}/snapshot_repository</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -150,12 +150,12 @@
         <pluginRepository>
             <id>lutece</id>
             <name>luteceRepository</name>
-            <url>http://${serverUrl}/maven_repository</url>
+            <url>https://${serverUrl}/maven_repository</url>
         </pluginRepository>
         <pluginRepository>
             <id>luteceSnapshot</id>
             <name>luteceSnapshot</name>
-            <url>http://${serverUrl}/snapshot_repository</url>
+            <url>https://${serverUrl}/snapshot_repository</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -649,13 +649,13 @@
     <distributionManagement>
         <repository>
             <id>lutece_releases_repository</id>
-            <url>http://${serverUrl}/nexus/content/repositories/lutece_releases_repository</url>
+            <url>https://${serverUrl}/nexus/content/repositories/lutece_releases_repository</url>
         </repository>
 
         <snapshotRepository>
             <uniqueVersion>true</uniqueVersion>
             <id>lutece_snapshots_repository</id>
-            <url>http://${serverUrl}/nexus/content/repositories/lutece_snapshots_repository</url>
+            <url>https://${serverUrl}/nexus/content/repositories/lutece_snapshots_repository</url>
         </snapshotRepository>
 
         <site>
