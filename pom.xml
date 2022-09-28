@@ -5,7 +5,7 @@
     <name>Lutece global pom</name>
     <url>https://${serverUrl}/</url>
     <packaging>pom</packaging>
-    <version>6.0.1-SNAPSHOT</version>
+    <version>6.1.0-SNAPSHOT</version>
 
     <properties>
         <!-- Misc build parameters -->
@@ -51,7 +51,7 @@
         <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
-        <maven-lutece-plugin.version>4.1.1</maven-lutece-plugin.version>
+        <maven-lutece-plugin.version>4.1.2-SNAPSHOT</maven-lutece-plugin.version>
         <lutece-maven-report.version>1.0.0</lutece-maven-report.version>
         <license-maven-plugin.version>4.1</license-maven-plugin.version>
         <maven-xdoc2md-plugin.version>1.0.3</maven-xdoc2md-plugin.version>
@@ -63,8 +63,8 @@
         <build-config.version>1.2.1</build-config.version>
 
         <!-- Runtime dependencies versions -->
-        <servlet-api.version>3.1.0</servlet-api.version>
-        <jsp-api.version>2.3.3</jsp-api.version>
+        <servlet-api.version>4.0.4</servlet-api.version>
+        <jsp-api.version>2.3.6</jsp-api.version>
         <library-lutece-unit-testing.version>4.1.1</library-lutece-unit-testing.version>
         <!-- All database connectors must be kept in sync -->
         <!-- with lutece-core src/sql/build.properties -->
@@ -167,14 +167,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <version>${servlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
             <version>${jsp-api.version}</version>
             <scope>provided</scope>
         </dependency>
