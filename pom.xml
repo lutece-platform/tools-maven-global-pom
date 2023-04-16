@@ -70,7 +70,7 @@
         <!-- with lutece-core src/sql/build.properties -->
         <mysql.version>8.0.26</mysql.version>
         <postgresql.version>9.4.1211</postgresql.version>
-        <hsqldb.version>2.3.4</hsqldb.version>
+        <hsqldb.version>2.7.1</hsqldb.version>
 
         <!-- directory provided by the artifact fr.paris.lutece.tools:build-config -->
         <build-config.location>build-config</build-config.location>
