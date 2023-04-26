@@ -5,7 +5,7 @@
     <name>Lutece global pom</name>
     <url>https://${serverUrl}/</url>
     <packaging>pom</packaging>
-    <version>6.1.0-SNAPSHOT</version>
+    <version>8.0.0-SNAPSHOT</version>
 
     <properties>
         <!-- Misc build parameters -->
@@ -38,7 +38,7 @@
         <maven-formatter-plugin.version>2.10.0</maven-formatter-plugin.version>
         <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-        <maven-jacoco-plugin.version>0.8.4</maven-jacoco-plugin.version>
+        <maven-jacoco-plugin.version>0.8.7</maven-jacoco-plugin.version>
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>  <!-- 3.1.1 has issues with the JDK 11 -->
         <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
         <maven-surefire-report-plugin.version>3.0.0-M3</maven-surefire-report-plugin.version>
@@ -63,9 +63,9 @@
         <build-config.version>1.2.1</build-config.version>
 
         <!-- Runtime dependencies versions -->
-        <servlet-api.version>4.0.4</servlet-api.version>
-        <jsp-api.version>2.3.6</jsp-api.version>
-        <library-lutece-unit-testing.version>4.1.1</library-lutece-unit-testing.version>
+        <servlet-api.version>6.0.0</servlet-api.version>
+        <jsp-api.version>3.1.1</jsp-api.version>
+        <library-lutece-unit-testing.version>5.0.0-SNAPSHOT</library-lutece-unit-testing.version>
         <!-- All database connectors must be kept in sync -->
         <!-- with lutece-core src/sql/build.properties -->
         <mysql.version>8.0.26</mysql.version>
@@ -165,6 +165,7 @@
         </pluginRepository>
     </pluginRepositories>
 
+	<!-- JAKARTA 10 API -->
     <dependencies>
         <dependency>
             <groupId>jakarta.servlet</groupId>
@@ -178,6 +179,8 @@
             <version>${jsp-api.version}</version>
             <scope>provided</scope>
         </dependency>
+        
+        
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>library-lutece-unit-testing</artifactId>
