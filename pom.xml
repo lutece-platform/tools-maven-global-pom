@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.paris.lutece.tools</groupId>
@@ -166,21 +167,34 @@
     </pluginRepositories>
 
 	<!-- JAKARTA 10 API -->
+	<dependencyManagement>
+    <dependencies>
+	  <dependency>
+	    <groupId>jakarta.platform</groupId>
+	    <artifactId>jakarta.jakartaee-bom</artifactId>
+	    <version>10.0.0</version>
+	    <type>pom</type>
+	    <scope>import</scope>
+	  </dependency>
+      <dependency>
+		    <groupId>org.jboss.weld.servlet</groupId>
+		    <artifactId>weld-servlet-shaded</artifactId>
+   			<version>5.1.0.Final</version>
+    		<scope>runtime</scope>
+		</dependency>
+    </dependencies>
+  </dependencyManagement>	
     <dependencies>
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>${servlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet.jsp</groupId>
             <artifactId>jakarta.servlet.jsp-api</artifactId>
-            <version>${jsp-api.version}</version>
             <scope>provided</scope>
-        </dependency>
-        
-        
+        </dependency>                
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>library-lutece-unit-testing</artifactId>
@@ -194,6 +208,11 @@
             <version>${build-config.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+		    <groupId>jakarta.enterprise</groupId>
+		    <artifactId>jakarta.enterprise.cdi-api</artifactId>
+		    <scope>provided</scope>
+		</dependency>
     </dependencies>
 
     <reporting>
@@ -491,16 +510,15 @@
                         <!-- setup recording of our main script to generate a test report -->
                         <property name="antrun_report_dir" value="target/surefire-reports/" />
                         <property name="antrun_report_basename" value="antrun_report" />
-                        <property name="antrun_report_txt" value="${antrun_report_dir}/${antrun_report_basename}.txt" />
+                        <property name="antrun_report_txt" value="${antrun_report_dir}/${antrun_report_basename}.txt" />                         
                         <mkdir dir="${basedir}/${antrun_report_dir}" />
                         <record name="${basedir}/${antrun_report_txt}" append="true" action="start" />
-                        <!-- run our main ant script -->
+						<!-- run our main ant script -->
                         
                         <ant antfile="${basedir}/target/${explodedDirectory}/WEB-INF/sql/build.xml" dir="${basedir}/target/${explodedDirectory}/WEB-INF/sql/">
                             <target name="all" />
                         </ant>
-                        <record name="${basedir}/${antrun_report_txt}" action="stop" />
-
+						<record name="${basedir}/${antrun_report_txt}" action="stop" />
                         <!-- Load recording of our main script to generate the xml report -->
                         <loadfile srcfile="${basedir}/${antrun_report_txt}" property="antrun_failures">
                             <filterchain>
@@ -516,20 +534,20 @@
                             <equals arg1="${antrun_failures}" arg2="$${antrun_failures}" />
                             <then>
                                 <!-- No failures -->
-                                <echoxml file="${basedir}/${antrun_report_xml}">
-                                    <testsuite name="antrunsql" time="1" tests="1" errors="0" skipped="0" failures="0">
-                                        <testcase name="antrunsql" classname="antrunsql" time="1" />
-                                    </testsuite>
-                                </echoxml>
+                             	 <echoxml file="${basedir}/${antrun_report_xml}">
+                                     <testsuite name="antrunsql" time="1" tests="1" errors="0" skipped="0" failures="0">
+                                         <testcase name="antrunsql" classname="antrunsql" time="1" />
+                                     </testsuite>
+                             	 </echoxml>
                             </then>
                             <else>
                                 <!-- failures -->
                                 <echoxml file="${basedir}/${antrun_report_xml}">
-                                    <testsuite name="antrunsql" time="1" tests="1" errors="1" skipped="0" failures="0">
-                                        <testcase name="antrunsql" classname="antrunsql" time="1">
-                                            <failure type="antrunsql">${antrun_failures}</failure>
-                                        </testcase>
-                                    </testsuite>
+                                 	 <testsuite name="antrunsql" time="1" tests="1" errors="1" skipped="0" failures="0">
+                                         <testcase name="antrunsql" classname="antrunsql" time="1">
+                                             <failure type="antrunsql">${antrun_failures}</failure>
+                                         </testcase>
+                                     </testsuite>
                                 </echoxml>
                             </else>
                         </if>
@@ -755,6 +773,7 @@
                 <antrun-lutece-db-properties>db-test-hsql.properties</antrun-lutece-db-properties>
             </properties>
         </profile>
+
     </profiles>
 
 </project>
