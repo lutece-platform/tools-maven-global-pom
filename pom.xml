@@ -12,8 +12,8 @@
         <!-- Misc build parameters -->
         <memory.min>256m</memory.min>
         <memory.max>1g</memory.max>
-        <targetJdk>1.8</targetJdk>
-        <java.source.version>1.8</java.source.version>
+        <targetJdk>17</targetJdk>
+        <java.source.version>17</java.source.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Directory -->
@@ -52,7 +52,7 @@
         <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
-        <maven-lutece-plugin.version>4.1.2-SNAPSHOT</maven-lutece-plugin.version>
+        <maven-lutece-plugin.version>4.1.3-SNAPSHOT</maven-lutece-plugin.version>
         <lutece-maven-report.version>1.0.0</lutece-maven-report.version>
         <license-maven-plugin.version>4.1</license-maven-plugin.version>
         <maven-xdoc2md-plugin.version>1.0.3</maven-xdoc2md-plugin.version>
@@ -451,7 +451,16 @@
                 <version>${maven-lutece-plugin.version}</version>
                 <configuration>
                     <localConfDirectory>${localConfDirectory}</localConfDirectory>
+                    <webResources>
+	           			 <resource>
+	              		<!-- this is relative to the pom.xml directory -->
+	              			<directory>${basedir}/webapp</directory>
+	                        <filtering>true</filtering>
+	            		</resource>
+          			</webResources>
+                    <webappDirectory>${basedir}/target/lutece</webappDirectory>                    			        
                 </configuration>
+                
             </plugin>
             <plugin>
                 <groupId>fr.paris.lutece.tools</groupId>
@@ -652,7 +661,28 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>${maven-deploy-plugin.version}</version>
+            </plugin>     
+             <plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>3.11-SNAPSHOT</version>
+                <configuration>
+                    <serverName>luteceServer</serverName>
+                     <deployPackages>all</deployPackages>
+                </configuration>                
             </plugin>
+            
+         <!--   <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <http.port>9080</http.port>
+                        <war.name>lutece</war.name>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>-->
         </plugins>
 
         <extensions>
@@ -670,6 +700,8 @@
                 <version>${maven-wagon-ftp.version}</version>
             </extension>
         </extensions>
+
+
 
     </build>
 
