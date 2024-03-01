@@ -180,7 +180,7 @@
 	   <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-bom</artifactId>
-            <version>3.0.0-beta1</version>
+            <version>2.23.0</version>
             <scope>import</scope>
             <type>pom</type>
         </dependency>
@@ -192,12 +192,12 @@
             <type>pom</type>
         </dependency>
         <dependency>
-	      <groupId>com.fasterxml.jackson</groupId>
-	      <artifactId>jackson-bom</artifactId>
-	      <version>2.16.1</version>
-	      <scope>import</scope>
-	      <type>pom</type>
-	    </dependency>     
+			<groupId>com.fasterxml.jackson</groupId>
+	    	<artifactId>jackson-bom</artifactId>
+	    	<version>2.16.1</version>
+	    	<scope>import</scope>
+	    	<type>pom</type>
+    	</dependency>        
     </dependencies>
   </dependencyManagement>	
     <dependencies>
@@ -685,6 +685,11 @@
                 <configuration>
                     <serverName>luteceServer</serverName>
                      <deployPackages>all</deployPackages>
+                     <bootstrapProperties>
+						<build.directory>${project.build.directory}</build.directory>
+						<app.context.root>${project.artifactId}</app.context.root>
+						<appLocation>${project.artifactId}-${project.version}.war</appLocation>
+					</bootstrapProperties>
                 </configuration>                
             </plugin>
             
