@@ -13,7 +13,8 @@
         <memory.min>256m</memory.min>
         <memory.max>1g</memory.max>
         <targetJdk>17</targetJdk>
-        <java.source.version>17</java.source.version>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>       
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Directory -->
@@ -52,7 +53,7 @@
         <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
-        <maven-lutece-plugin.version>4.1.3-SNAPSHOT</maven-lutece-plugin.version>
+        <maven-lutece-plugin.version>5.0.0-SNAPSHOT</maven-lutece-plugin.version>
         <lutece-maven-report.version>1.0.0</lutece-maven-report.version>
         <license-maven-plugin.version>4.1</license-maven-plugin.version>
         <maven-xdoc2md-plugin.version>1.0.3</maven-xdoc2md-plugin.version>
@@ -61,17 +62,16 @@
         <ant-optional.version>1.5.3-1</ant-optional.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <maven-wagon-ftp.version>2.6</maven-wagon-ftp.version>
-        <build-config.version>1.2.1</build-config.version>
+        <build-config.version>2.0.0-SNAPSHOT</build-config.version>
 
 
         <!-- Runtime dependencies versions -->
-        <servlet-api.version>6.0.0</servlet-api.version>
-        <jsp-api.version>3.1.1</jsp-api.version>
+        
         <library-lutece-unit-testing.version>5.0.0-SNAPSHOT</library-lutece-unit-testing.version>
         <!-- All database connectors must be kept in sync -->
         <!-- with lutece-core src/sql/build.properties -->
         <mysql.version>8.0.26</mysql.version>
-        <postgresql.version>9.4.1211</postgresql.version>
+        <postgresql.version>42.7.2</postgresql.version>
         <hsqldb.version>2.3.4</hsqldb.version>
 
         <!-- directory provided by the artifact fr.paris.lutece.tools:build-config -->
@@ -238,9 +238,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>${maven-jxr-plugin.version}</version>
-                <configuration>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
-                </configuration>
+              
             </plugin>
             <!--    PROJECT INFO       -->
             <plugin>
@@ -298,8 +296,7 @@
                     <failsOnError>false</failsOnError>
                     <failOnViolation>false</failOnViolation>
                     <printFailingErrors>true</printFailingErrors>
-                    <source>${java.source.version}</source>
-                    <target>${java.source.version}</target>
+                    <targetJdk>${targetJdk}</targetJdk>
                 </configuration>
             </plugin>
             <!--    JDEPEND       -->
@@ -323,18 +320,20 @@
                         <tag>NOT_YET_DOCUMENTED</tag>
                     </tags>
                 </configuration>
-            </plugin>
-            <!--    FIND BUGS       -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>${maven-findbugs-plugin.version}</version>
-                <configuration>
-                    <xmlOutput>true</xmlOutput>
-                    <threshold>Normal</threshold>
-                    <effort>Max</effort>
-                </configuration>
-            </plugin>
+            </plugin>            
+	        <plugin>
+	            <groupId>com.github.spotbugs</groupId>
+	            <artifactId>spotbugs-maven-plugin</artifactId>
+	            <version>4.5.3.0</version>
+	            <configuration>
+					<xmlOutput>true</xmlOutput>
+					<!--
+					<excludeFilterFile>${build-config.location}/spotbugs/spotbugs-exclude.xml</excludeFilterFile>
+	          		<includeFilterFile>${build-config.location}/spotbugs/spotbugs-include.xml</includeFilterFile>			    
+	           		-->
+	            </configuration>
+	
+	        </plugin>
             <!--     SUREFIRE       --> 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -447,8 +446,6 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>${maven-site-plugin.version}</version>
                 <configuration>
-                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
                     <locales>en,fr</locales>
                 </configuration>
                 <executions>
@@ -487,11 +484,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <source>${java.source.version}</source>
-                    <target>${java.source.version}</target>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -628,7 +620,6 @@
                     </mapping>
                     <quiet>true</quiet>
                     <failIfMissing>false</failIfMissing>
-                    <encoding>${project.build.sourceEncoding}</encoding>
                     <properties>
                         <current.year>${current.year}</current.year>
                     </properties>
@@ -650,6 +641,7 @@
                     </execution>
                 </executions>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -662,7 +654,27 @@
                     </dependency>
                 </dependencies>
             </plugin>
-           
+           <plugin>
+               <groupId>com.github.spotbugs</groupId>
+       		   <artifactId>spotbugs-maven-plugin</artifactId>
+               <version>4.5.3.0</version>
+               <configuration>
+               <plugins>
+                    <plugin>
+                        <groupId>com.h3xstream.findsecbugs</groupId>
+                        <artifactId>findsecbugs-plugin</artifactId>
+                        <version>1.12.0</version>
+                    </plugin>
+                </plugins>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>fr.paris.lutece.tools</groupId>
+                        <artifactId>build-config</artifactId>
+                        <version>${build-config.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -752,16 +764,6 @@
     </scm>
 
     <profiles>
-        <profile>
-            <id>doclint-java8-disable</id>
-            <activation>
-                <jdk>[1.8,)</jdk>
-            </activation>
-            <properties>
-                <additionalparam>-Xdoclint:none</additionalparam>
-            </properties>
-        </profile>
-
         <!-- databases drivers, for tests only -->
         <!-- Do not activate these for releases -->
         <!-- Choose your driver during tests with one of the following: -->
