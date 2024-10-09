@@ -95,6 +95,12 @@
         
         <current.year>${maven.build.timestamp}</current.year>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
+	
+	<!-- Setting Liberty configuration with Maven project properties-->
+        <liberty.defaultVar.app.context.root>${project.artifactId}</liberty.defaultVar.app.context.root>
+        <liberty.defaultVar.build.directory>${project.build.directory}</liberty.defaultVar.build.directory>
+        <liberty.defaultVar.appLocation>${project.artifactId}-${project.version}.war</liberty.defaultVar.appLocation>
+
     </properties>
 
     <prerequisites>
@@ -698,11 +704,6 @@
                 <configuration>
                     <serverName>luteceServer</serverName>
                      <deployPackages>all</deployPackages>
-                     <bootstrapProperties>
-						<build.directory>${project.build.directory}</build.directory>
-						<app.context.root>${project.artifactId}</app.context.root>
-						<appLocation>${project.artifactId}-${project.version}.war</appLocation>
-					</bootstrapProperties>
                 </configuration>                
             </plugin>
             
