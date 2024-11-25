@@ -488,6 +488,8 @@
                 <extensions>true</extensions>
                 <version>${maven-lutece-plugin.version}</version>
                 <configuration>
+		     <localConfDirectory>${localConfDirectory}</localConfDirectory> 
+
                     <!-- To work with the maven-openliberty-plugin in dev mode with exploded mode, uncomment the web resource below-->
                     <!--
 					  <webResources>
