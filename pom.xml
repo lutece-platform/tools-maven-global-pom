@@ -67,6 +67,10 @@
         <!-- Runtime dependencies versions -->
         
         <library-lutece-unit-testing.version>5.0.0-SNAPSHOT</library-lutece-unit-testing.version>
+        <test-jaxb-runtime.version>4.0.5</test-jaxb-runtime.version>
+        <test-hibernate-validator.version>8.0.1.Final</test-hibernate-validator.version>
+        <test-jakarta.el.version>5.0.0-M1</test-jakarta.el.version>
+
         <!-- All database connectors must be kept in sync -->
         <!-- with lutece-core src/sql/build.properties -->
         <mysql.version>8.0.26</mysql.version>
