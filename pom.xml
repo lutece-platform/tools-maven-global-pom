@@ -61,17 +61,17 @@
         <ant-optional.version>1.5.3-1</ant-optional.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <maven-wagon-ftp.version>2.6</maven-wagon-ftp.version>
-        <build-config.version>2.0.0</build-config.version>
+        <build-config.version>2.0.2-SNAPSHOT</build-config.version>
 
         <!-- Runtime dependencies versions -->
         <servlet-api.version>4.0.4</servlet-api.version>
         <jsp-api.version>2.3.6</jsp-api.version>
         <library-lutece-unit-testing.version>4.1.1</library-lutece-unit-testing.version>
         <!-- All database connectors must be kept in sync -->
-        <!-- with lutece-core src/sql/build.properties -->
+        <!-- with src/main/resources/build-config/ant/build.properties file present in tools-maven-build-config plugin-->
         <mysql.version>8.0.26</mysql.version>
         <postgresql.version>42.7.2</postgresql.version>
-        <hsqldb.version>2.3.4</hsqldb.version>
+        <hsqldb.version>2.7.4</hsqldb.version>
 
         <!-- directory provided by the artifact fr.paris.lutece.tools:build-config -->
         <build-config.location>build-config</build-config.location>
