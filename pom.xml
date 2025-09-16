@@ -61,7 +61,7 @@
         <ant-optional.version>1.5.3-1</ant-optional.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <maven-wagon-ftp.version>2.6</maven-wagon-ftp.version>
-        <build-config.version>2.0.1</build-config.version>
+        <build-config.version>2.0.2-SNAPSHOT</build-config.version>
 
         <!-- Runtime dependencies versions -->
         <servlet-api.version>4.0.4</servlet-api.version>
