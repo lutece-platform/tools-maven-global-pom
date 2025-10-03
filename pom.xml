@@ -63,6 +63,8 @@
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <maven-wagon-ftp.version>2.6</maven-wagon-ftp.version>
         <build-config.version>2.0.1-SNAPSHOT</build-config.version>
+		<commons.lang.version>3.19.0</commons.lang.version>
+		<common.beanutils.version>1.11.0</common.beanutils.version>
 
 
         <!-- Runtime dependencies versions -->
@@ -232,8 +234,18 @@
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>
 		    <version>1.7.36</version>
-		</dependency>   
-		 
+		</dependency>  
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency> 
+		 <!-- BeanUtils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${common.beanutils.version}</version>
+		</dependency>
     </dependencies>
   </dependencyManagement>	
     <dependencies>
