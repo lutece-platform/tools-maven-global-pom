@@ -23,13 +23,12 @@
 
         <!-- Lutece specific parameters -->
         <serverUrl>dev.lutece.paris.fr</serverUrl>
-        <jiraBaseUrl>https://${serverUrl}/jira</jiraBaseUrl>
+        <bugtrackerBaseUrl>https://${serverUrl}/bugtracker</bugtrackerBaseUrl>
         <organization.logo>https://${serverUrl}/images/banner_left.png</organization.logo>
         <github.project>lutece-platform</github.project>
         <twitter.account>LuteceFoundry</twitter.account>
         <openhub.id>7203</openhub.id>
-        <jiraProjectName>GLOBALPOM</jiraProjectName>
-        <jiraComponentId>12858</jiraComponentId>
+        <componentName>globalpom</componentName>
 
         <!-- Build dependencies versions -->
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
@@ -53,7 +52,7 @@
         <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
-        <maven-lutece-plugin.version>6.0.1-SNAPSHOT</maven-lutece-plugin.version>
+        <maven-lutece-plugin.version>6.0.2-SNAPSHOT</maven-lutece-plugin.version>
         <lutece-maven-report.version>1.0.0</lutece-maven-report.version>
         <license-maven-plugin.version>4.1</license-maven-plugin.version>
         <maven-xdoc2md-plugin.version>1.0.3</maven-xdoc2md-plugin.version>
@@ -62,7 +61,7 @@
         <ant-optional.version>1.5.3-1</ant-optional.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <maven-wagon-ftp.version>2.6</maven-wagon-ftp.version>
-        <build-config.version>2.0.1-SNAPSHOT</build-config.version>
+        <build-config.version>2.0.2-SNAPSHOT</build-config.version>
 		<commons.lang.version>3.19.0</commons.lang.version>
 		<common.beanutils.version>1.11.0</common.beanutils.version>
 
@@ -123,12 +122,12 @@
     </organization>
 
     <issueManagement>
-        <system>jira</system>
-        <url>${jiraBaseUrl}/browse/${jiraProjectName}</url>
+        <system>bugtracker Issue</system>
+        <url>${bugtrackerBaseUrl}/projects/${componentName}/issues</url>
     </issueManagement>
 
     <ciManagement>
-        <system>continuum</system>
+        <system>jenkins</system>
         <url>https://${serverUrl}/jenkins/</url>
         <notifiers>
             <notifier>
@@ -780,22 +779,10 @@
              <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>3.11-SNAPSHOT</version>
+                <version>3.11-SNAPSHOT</version> 
                 <configuration>
-                    <serverName>luteceServer</serverName>
-                      <copyDependencies>
-                        <dependencyGroup>
-                            <location>${project.build.directory}/liberty/wlp/usr/shared/resources</location>
-                           
-                            <dependency>
-                                <groupId>com.hazelcast</groupId>
-                                <artifactId>hazelcast</artifactId>
-                                <version>5.3.6</version>
-                            </dependency>
-
-                        </dependencyGroup>
-                    </copyDependencies>
-                </configuration>                
+                    <serverName>luteceServer</serverName>                      
+                </configuration>                                 
             </plugin>
         </plugins>
 
