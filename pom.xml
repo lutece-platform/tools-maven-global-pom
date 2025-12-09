@@ -72,6 +72,7 @@
         <test-jaxb-runtime.version>4.0.5</test-jaxb-runtime.version>
         <test-hibernate-validator.version>8.0.1.Final</test-hibernate-validator.version>
         <test-jakarta.el.version>5.0.0-M1</test-jakarta.el.version>
+        <test-junit-platform-suite-engine.version>1.10.2</test-junit-platform-suite-engine.version>
 
         <!-- All database connectors must be kept in sync -->
         <!-- with src/main/resources/build-config/ant/build.properties file present in tools-maven-build-config plugin-->
@@ -215,6 +216,12 @@
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
             <version>${test-jaxb-runtime.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-engine</artifactId>
+            <version>${test-junit-platform-suite-engine.version}</version>
             <scope>test</scope>
         </dependency>
 
