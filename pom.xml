@@ -61,7 +61,7 @@
         <ant-optional.version>1.5.3-1</ant-optional.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <maven-wagon-ftp.version>2.6</maven-wagon-ftp.version>
-        <build-config.version>2.0.2</build-config.version>
+        <build-config.version>2.0.3-SNAPSHOT</build-config.version>
 
         <!-- Runtime dependencies versions -->
         <servlet-api.version>4.0.4</servlet-api.version>
@@ -69,7 +69,7 @@
         <library-lutece-unit-testing.version>4.1.1</library-lutece-unit-testing.version>
         <!-- All database connectors must be kept in sync -->
         <!-- with src/main/resources/build-config/ant/build.properties file present in tools-maven-build-config plugin-->
-        <mysql.version>8.0.26</mysql.version>
+        <mysql.version>9.5.0</mysql.version>
         <postgresql.version>42.7.2</postgresql.version>
         <hsqldb.version>2.7.4</hsqldb.version>
 
@@ -718,8 +718,8 @@
             </activation>
             <dependencies>
                 <dependency>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
+                    <groupId>com.mysql</groupId>
+                    <artifactId>mysql-connector-j</artifactId>
                     <!-- Must be kept in sync with lutece-core src/sql/build.properties -->
                     <version>${mysql.version}</version>
                     <optional>true</optional>
