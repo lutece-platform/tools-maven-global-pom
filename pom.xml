@@ -12,14 +12,12 @@
         <!-- Misc build parameters -->
         <memory.min>256m</memory.min>
         <memory.max>1g</memory.max>
-        <targetJdk>17</targetJdk>
         <maven.compiler.release>17</maven.compiler.release>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>       
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Directory -->
         <explodedDirectory>lutece</explodedDirectory>
-<!--		<webapp.name>${project.build.finalName}</webapp.name>-->
 
         <!-- Lutece specific parameters -->
         <serverUrl>dev.lutece.paris.fr</serverUrl>
@@ -31,42 +29,44 @@
         <componentName>globalpom</componentName>
 
         <!-- Build dependencies versions -->
-        <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
-        <maven-site-plugin.version>3.8.2</maven-site-plugin.version>
-        <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
-        <maven-pmd-plugin.version>3.12.0</maven-pmd-plugin.version>
-        <maven-findbugs-plugin.version>3.0.5</maven-findbugs-plugin.version>
-        <maven-formatter-plugin.version>2.10.0</maven-formatter-plugin.version>
-        <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
-        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
+        <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+        <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
+        <maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
+        <maven-formatter-plugin.version>2.29.0</maven-formatter-plugin.version>
+        <maven-war-plugin.version>3.5.1</maven-war-plugin.version>
+        <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
         <maven-jacoco-plugin.version>0.8.12</maven-jacoco-plugin.version>
-        <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>  <!-- 3.1.1 has issues with the JDK 11 -->
-        <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
-        <maven-surefire-report-plugin.version>3.0.0-M3</maven-surefire-report-plugin.version>
-        <maven-jxr-plugin.version>3.0.0</maven-jxr-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
+        <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
+        <maven-surefire-report-plugin.version>3.5.5</maven-surefire-report-plugin.version>
+        <maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <maven-jdepend-plugin.version>2.0</maven-jdepend-plugin.version>
         <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
         <maven-taglist-plugin.version>2.4</maven-taglist-plugin.version>
-        <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>  <!-- 3.0.0 has issues -->
-        <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
-        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
-        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
-        <maven-lutece-plugin.version>7.0.1-SNAPSHOT</maven-lutece-plugin.version>
+        <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
+        <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
+        <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+        <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+        <maven-lutece-plugin.version>7.1.0-SNAPSHOT</maven-lutece-plugin.version>
         <lutece-maven-report.version>1.0.0</lutece-maven-report.version>
         <license-maven-plugin.version>4.1</license-maven-plugin.version>
         <maven-xdoc2md-plugin.version>1.0.3</maven-xdoc2md-plugin.version>
-        <maven-scm-provider-jgit.version>1.9.2</maven-scm-provider-jgit.version>
-        <sonar-maven-report.version>0.1</sonar-maven-report.version>
+        <maven-scm-provider-jgit.version>2.2.1</maven-scm-provider-jgit.version>
         <ant-optional.version>1.5.3-1</ant-optional.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
-        <maven-wagon-ftp.version>2.6</maven-wagon-ftp.version>
+        <maven-wagon-ftp.version>3.5.3</maven-wagon-ftp.version>
         <build-config.version>3.0.0</build-config.version>
-		<commons.lang.version>3.19.0</commons.lang.version>
-		<common.beanutils.version>1.11.0</common.beanutils.version>
+        <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
+        <spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
+        <liberty-maven-plugin.version>3.12.1</liberty-maven-plugin.version>
+        <jakarta.jakartaee-api.version>10.0.0</jakarta.jakartaee-api.version>
+        <microprofile.version>6.1</microprofile.version>
+        <commons.lang.version>3.19.0</commons.lang.version>
+        <common.beanutils.version>1.11.0</common.beanutils.version>
 
         <!-- Runtime dependencies versions -->
-        
         <library-lutece-unit-testing.version>5.0.0</library-lutece-unit-testing.version>
         <test-jaxb-runtime.version>4.0.5</test-jaxb-runtime.version>
         <test-hibernate-validator.version>8.0.1.Final</test-hibernate-validator.version>
@@ -76,7 +76,7 @@
         <!-- All database connectors must be kept in sync -->
         <!-- with src/main/resources/build-config/ant/build.properties file present in tools-maven-build-config plugin-->
         <mysql.version>9.5.0</mysql.version>
-        <postgresql.version>42.7.2</postgresql.version>
+        <postgresql.version>42.7.10</postgresql.version>
         <hsqldb.version>2.7.4</hsqldb.version>
 
         <!-- directory provided by the artifact fr.paris.lutece.tools:build-config -->
@@ -89,23 +89,22 @@
         <lutece-antrun-db-name>lutece</lutece-antrun-db-name>
         <lutece-antrun-db-user>root</lutece-antrun-db-user>
         <lutece-antrun-db-password>motdepasse</lutece-antrun-db-password>
-        
+
         <!-- Sonar parameters-->
         <sonar.host.url>https://${serverUrl}/sonar</sonar.host.url>
         <sonar.sources>pom.xml,src/java,webapp</sonar.sources>
         <sonar.tests>src/test</sonar.tests>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
-        
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+
         <current.year>${maven.build.timestamp}</current.year>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
-	
-	<!-- Setting Liberty configuration with Maven project properties-->
+
+        <!-- Setting Liberty configuration with Maven project properties-->
         <liberty.defaultVar.app.context.root>${project.artifactId}</liberty.defaultVar.app.context.root>
         <liberty.defaultVar.build.directory>${project.build.directory}</liberty.defaultVar.build.directory>
         <liberty.defaultVar.appLocation>${project.artifactId}-${project.version}.war</liberty.defaultVar.appLocation>
-    	
+
     </properties>
 
     <licenses>
@@ -174,96 +173,97 @@
         </pluginRepository>
     </pluginRepositories>
 
-	<!-- JAKARTA 10 API -->
-	<dependencyManagement>
-    <dependencies>	  
-	   <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-bom</artifactId>
-            <version>2.24.1</version>
-            <scope>import</scope>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-			<groupId>com.fasterxml.jackson</groupId>
-	    	<artifactId>jackson-bom</artifactId>
-	    	<version>2.16.1</version>
-	    	<scope>import</scope>
-	    	<type>pom</type>
-    	</dependency>
-    	 <dependency>
-            <groupId>fr.paris.lutece.plugins</groupId>
-            <artifactId>library-lutece-unit-testing</artifactId>
-            <version>${library-lutece-unit-testing.version}</version>
-            <type>jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${test-hibernate-validator.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>jakarta.el</artifactId>
-            <version>${test-jakarta.el.version}</version>
-            <type>jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>${test-jaxb-runtime.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-suite-engine</artifactId>
-            <version>${test-junit-platform-suite-engine.version}</version>
-            <scope>test</scope>
-        </dependency>
+    <!-- JAKARTA 10 API -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-bom</artifactId>
+                <version>2.25.3</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>2.21.1</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>fr.paris.lutece.plugins</groupId>
+                <artifactId>library-lutece-unit-testing</artifactId>
+                <version>${library-lutece-unit-testing.version}</version>
+                <type>jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${test-hibernate-validator.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>jakarta.el</artifactId>
+                <version>${test-jakarta.el.version}</version>
+                <type>jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>${test-jaxb-runtime.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-suite-engine</artifactId>
+                <version>${test-junit-platform-suite-engine.version}</version>
+                <scope>test</scope>
+            </dependency>
 
-         <!--
-          commons-logging is a transitive dependency of many libraries with different versions.
-          Specify the latest version here to not depend on the order of declaration.
-          When we manage to get rid of commons-logging, we can safely remove this dependency.
-          Lutece-core depend on commons-beanutils libraries that use commons-logging.
-        -->
-	 	<dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.3.4</version>
-		</dependency>  
-		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-api</artifactId>
-		    <version>1.7.36</version>
-		</dependency>  
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${commons.lang.version}</version>
-		</dependency> 
-		 <!-- BeanUtils -->
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>${common.beanutils.version}</version>
-		</dependency>
-    </dependencies>
-  </dependencyManagement>	
+            <!--
+              commons-logging is a transitive dependency of many libraries with different versions.
+              Specify the latest version here to not depend on the order of declaration.
+              When we manage to get rid of commons-logging, we can safely remove this dependency.
+              Lutece-core depend on commons-beanutils libraries that use commons-logging.
+            -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.3.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>2.0.17</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang.version}</version>
+            </dependency>
+            <!-- BeanUtils -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${common.beanutils.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-       <dependency>
-	    <groupId>jakarta.platform</groupId>
-	    <artifactId>jakarta.jakartaee-api</artifactId>
-	    <version>10.0.0</version>
-	    <scope>provided</scope>
-	  </dependency>
-	   <dependency>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${jakarta.jakartaee-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.eclipse.microprofile</groupId>
             <artifactId>microprofile</artifactId>
-            <version>6.1</version>
+            <version>${microprofile.version}</version>
             <scope>provided</scope>
             <type>pom</type>
         </dependency>
@@ -273,8 +273,8 @@
             <version>${build-config.version}</version>
             <scope>provided</scope>
         </dependency>
-       
     </dependencies>
+
     <reporting>
         <plugins>
             <!--    JXR       -->
@@ -282,7 +282,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>${maven-jxr-plugin.version}</version>
-              
             </plugin>
             <!--    PROJECT INFO       -->
             <plugin>
@@ -340,7 +339,6 @@
                     <failsOnError>false</failsOnError>
                     <failOnViolation>false</failOnViolation>
                     <printFailingErrors>true</printFailingErrors>
-                    <targetJdk>${targetJdk}</targetJdk>
                 </configuration>
             </plugin>
             <!--    JDEPEND       -->
@@ -364,21 +362,16 @@
                         <tag>NOT_YET_DOCUMENTED</tag>
                     </tags>
                 </configuration>
-            </plugin>            
-	        <plugin>
-	            <groupId>com.github.spotbugs</groupId>
-	            <artifactId>spotbugs-maven-plugin</artifactId>
-	            <version>4.5.3.0</version>
-	            <configuration>
-					<xmlOutput>true</xmlOutput>
-					<!--
-					<excludeFilterFile>${build-config.location}/spotbugs/spotbugs-exclude.xml</excludeFilterFile>
-	          		<includeFilterFile>${build-config.location}/spotbugs/spotbugs-include.xml</includeFilterFile>			    
-	           		-->
-	            </configuration>
-	
-	        </plugin>
-            <!--     SUREFIRE       --> 
+            </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs-maven-plugin.version}</version>
+                <configuration>
+                    <xmlOutput>true</xmlOutput>
+                </configuration>
+            </plugin>
+            <!--     SUREFIRE       -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
@@ -387,13 +380,7 @@
                     <showSuccess>true</showSuccess>
                 </configuration>
             </plugin>
-            <!--      SONAR          -->
-            <plugin>
-                <groupId>org.codehaus.sonar-plugins</groupId>
-                <artifactId>maven-report</artifactId>
-                <version>${sonar-maven-report.version}</version>
-            </plugin>
-            <!--      JACOCO        -->  
+            <!--      JACOCO        -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -420,9 +407,9 @@
     <build>
         <sourceDirectory>src/java</sourceDirectory>
         <resources>
-       		<resource>
-            	<directory>src/main/resources</directory>
-        	</resource> 
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
             <resource>
                 <directory>src/java</directory>
                 <excludes>
@@ -431,45 +418,44 @@
             </resource>
         </resources>
         <testResources>
-        <testResource>
-              <directory>src/test/resources</directory>
-		</testResource>
-        	<testResource>
-        		<!-- <directory>target/${webapp.name}/WEB-INF/</directory>-->
-        		 <directory>target/lutece/WEB-INF/</directory>
-        		 <excludes>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <directory>target/lutece/WEB-INF/</directory>
+                <excludes>
                     <exclude>lib</exclude>
                 </excludes>
-           	     <targetPath>WEB-INF</targetPath>
-        	</testResource>
+                <targetPath>WEB-INF</targetPath>
+            </testResource>
         </testResources>
 
         <plugins>
-	      <plugin>
-	        <groupId>org.apache.maven.plugins</groupId>
-	        <artifactId>maven-enforcer-plugin</artifactId>
-	        <version>3.5.0</version>
-	        <executions>
-	          <execution>
-	            <id>enforce-maven</id>
-	            <goals>
-	              <goal>enforce</goal>
-	            </goals>
-	            <configuration>
-	              <rules>
-	              	<!-- Enforce maven [3.6,) -->
-	                <requireMavenVersion>
-	                  <version>3.6</version>
-	                </requireMavenVersion>
-	                <!-- Enforce Java [17,) -->
-                    <requireJavaVersion>
-                       <version>17</version>
-                    </requireJavaVersion>
-	              </rules>    
-	            </configuration>
-	          </execution>
-	        </executions>
-	      </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <!-- Enforce maven [3.6,) -->
+                                <requireMavenVersion>
+                                    <version>3.9</version>
+                                </requireMavenVersion>
+                                <!-- Enforce Java [17,) -->
+                                <requireJavaVersion>
+                                    <version>17</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!--    JAVADOC       -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -546,19 +532,8 @@
                 <extensions>true</extensions>
                 <version>${maven-lutece-plugin.version}</version>
                 <configuration>
-		     <localConfDirectory>${localConfDirectory}</localConfDirectory> 
-
-                    <!-- To work with the maven-openliberty-plugin in dev mode with exploded mode, uncomment the web resource below-->
-                    <!--
-					  <webResources>
-	           			 <resource>
-	              			<directory>${basedir}/webapp</directory>
-	                        <filtering>true</filtering>
-	            		</resource>
-          			  </webResources> 
-				     -->    
+                    <localConfDirectory>${localConfDirectory}</localConfDirectory>
                 </configuration>
-                
             </plugin>
             <plugin>
                 <groupId>fr.paris.lutece.tools</groupId>
@@ -585,9 +560,6 @@
                         <exclude>**/LuteceTestCase.java</exclude>
                         <exclude>**/AllTests.java</exclude>
                     </excludes>
-                    <!--<systemPropertyVariables>
-                    	<webapp.name>${webapp.name}</webapp.name>
-                   </systemPropertyVariables>-->
                 </configuration>
             </plugin>
             <plugin>
@@ -595,7 +567,7 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>${maven-antrun-plugin.version}</version>
                 <configuration>
-                    <tasks>
+                    <target>
                         <taskdef resource="net/sf/antcontrib/antcontrib.properties" />
 
                         <!-- replace markers in db-test-*.properties to allow command line values for tests -->
@@ -615,15 +587,14 @@
                         <!-- setup recording of our main script to generate a test report -->
                         <property name="antrun_report_dir" value="target/surefire-reports/" />
                         <property name="antrun_report_basename" value="antrun_report" />
-                        <property name="antrun_report_txt" value="${antrun_report_dir}/${antrun_report_basename}.txt" />                         
+                        <property name="antrun_report_txt" value="${antrun_report_dir}/${antrun_report_basename}.txt" />
                         <mkdir dir="${basedir}/${antrun_report_dir}" />
                         <record name="${basedir}/${antrun_report_txt}" append="true" action="start" />
-						<!-- run our main ant script -->
-                        
+                        <!-- run our main ant script -->
                         <ant antfile="${basedir}/target/${explodedDirectory}/WEB-INF/sql/build.xml" dir="${basedir}/target/${explodedDirectory}/WEB-INF/sql/">
                             <target name="all" />
                         </ant>
-						<record name="${basedir}/${antrun_report_txt}" action="stop" />
+                        <record name="${basedir}/${antrun_report_txt}" action="stop" />
                         <!-- Load recording of our main script to generate the xml report -->
                         <loadfile srcfile="${basedir}/${antrun_report_txt}" property="antrun_failures">
                             <filterchain>
@@ -639,24 +610,24 @@
                             <equals arg1="${antrun_failures}" arg2="$${antrun_failures}" />
                             <then>
                                 <!-- No failures -->
-                             	 <echoxml file="${basedir}/${antrun_report_xml}">
-                                     <testsuite name="antrunsql" time="1" tests="1" errors="0" skipped="0" failures="0">
-                                         <testcase name="antrunsql" classname="antrunsql" time="1" />
-                                     </testsuite>
-                             	 </echoxml>
+                                <echoxml file="${basedir}/${antrun_report_xml}">
+                                    <testsuite name="antrunsql" time="1" tests="1" errors="0" skipped="0" failures="0">
+                                        <testcase name="antrunsql" classname="antrunsql" time="1" />
+                                    </testsuite>
+                                </echoxml>
                             </then>
                             <else>
                                 <!-- failures -->
                                 <echoxml file="${basedir}/${antrun_report_xml}">
-                                 	 <testsuite name="antrunsql" time="1" tests="1" errors="1" skipped="0" failures="0">
-                                         <testcase name="antrunsql" classname="antrunsql" time="1">
-                                             <failure type="antrunsql">${antrun_failures}</failure>
-                                         </testcase>
-                                     </testsuite>
+                                    <testsuite name="antrunsql" time="1" tests="1" errors="1" skipped="0" failures="0">
+                                        <testcase name="antrunsql" classname="antrunsql" time="1">
+                                            <failure type="antrunsql">${antrun_failures}</failure>
+                                        </testcase>
+                                    </testsuite>
                                 </echoxml>
                             </else>
                         </if>
-                    </tasks>
+                    </target>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -698,15 +669,15 @@
                 <artifactId>license-maven-plugin</artifactId>
                 <version>${license-maven-plugin.version}</version>
                 <configuration>
-                <licenseSets>
-      			<licenseSet>
-                    <header>${build-config.location}/LICENSE.TXT</header>
-                    <includes>
-                        <include>src/java/**/*.java</include>
-                        <include>src/test/java/**/*.java</include>
-                    </includes>
-                 </licenseSet>
-                </licenseSets>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>${build-config.location}/LICENSE.TXT</header>
+                            <includes>
+                                <include>src/java/**/*.java</include>
+                                <include>src/test/java/**/*.java</include>
+                            </includes>
+                        </licenseSet>
+                    </licenseSets>
                     <mapping>
                         <java>slashstar_style</java>
                     </mapping>
@@ -733,7 +704,6 @@
                     </execution>
                 </executions>
             </plugin>
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -746,18 +716,18 @@
                     </dependency>
                 </dependencies>
             </plugin>
-           <plugin>
-               <groupId>com.github.spotbugs</groupId>
-       		   <artifactId>spotbugs-maven-plugin</artifactId>
-               <version>4.5.3.0</version>
-               <configuration>
-               <plugins>
-                    <plugin>
-                        <groupId>com.h3xstream.findsecbugs</groupId>
-                        <artifactId>findsecbugs-plugin</artifactId>
-                        <version>1.12.0</version>
-                    </plugin>
-                </plugins>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs-maven-plugin.version}</version>
+                <configuration>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>1.12.0</version>
+                        </plugin>
+                    </plugins>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -781,14 +751,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>${maven-deploy-plugin.version}</version>
-            </plugin>     
-             <plugin>
+            </plugin>
+            <plugin>
                 <groupId>fr.paris.lutece.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>3.12.1</version> 
+                <version>${liberty-maven-plugin.version}</version>
                 <configuration>
-                    <serverName>luteceServer</serverName>                      
-                </configuration>                                 
+                    <serverName>luteceServer</serverName>
+                </configuration>
             </plugin>
         </plugins>
 
