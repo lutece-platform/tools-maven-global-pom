@@ -63,6 +63,11 @@
         <maven-wagon-ftp.version>2.6</maven-wagon-ftp.version>
         <build-config.version>2.0.3</build-config.version>
 
+        <commons.lang.version>3.19.0</commons.lang.version>
+        <common.beanutils.version>1.11.0</common.beanutils.version>
+        <commons.fileupload.version>1.6.0</commons.fileupload.version>
+        <spring.version>5.3.39</spring.version>
+
         <!-- Runtime dependencies versions -->
         <servlet-api.version>4.0.4</servlet-api.version>
         <jsp-api.version>2.3.6</jsp-api.version>
@@ -165,6 +170,33 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-bom</artifactId>
+                <version>2.25.3</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons.fileupload.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${common.beanutils.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
