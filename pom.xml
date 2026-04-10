@@ -12,6 +12,7 @@
         <!-- Misc build parameters -->
         <memory.min>256m</memory.min>
         <memory.max>1g</memory.max>
+        <targetJdk>17</targetJdk>
         <maven.compiler.release>17</maven.compiler.release>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
