@@ -51,6 +51,7 @@
         <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
         <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
         <maven-lutece-plugin.version>7.1.0-SNAPSHOT</maven-lutece-plugin.version>
+        <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
         <lutece-maven-report.version>1.0.0</lutece-maven-report.version>
         <license-maven-plugin.version>4.1</license-maven-plugin.version>
         <maven-xdoc2md-plugin.version>1.0.3</maven-xdoc2md-plugin.version>
@@ -754,6 +755,11 @@
                 <version>${maven-deploy-plugin.version}</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+            </plugin>     
+             <plugin>
                 <groupId>fr.paris.lutece.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
                 <version>${liberty-maven-plugin.version}</version>
