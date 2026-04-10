@@ -295,7 +295,7 @@
                             <report>index</report>
                             <report>summary</report>
                             <report>dependencies</report>
-                            <report>cim</report>
+                            <report>ci-management</report>
                             <report>issue-tracking</report>
                             <report>license</report>
                             <report>scm</report>
