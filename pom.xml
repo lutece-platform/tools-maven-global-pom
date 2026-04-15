@@ -4,16 +4,17 @@
     <groupId>fr.paris.lutece.tools</groupId>
     <artifactId>lutece-global-pom</artifactId>
     <name>Lutece global pom</name>
+    <description>Parent POM shared by all Lutece projects (core, plugins, modules, sites and tools). Centralizes Java/Jakarta EE versions, build plugins configuration, reporting, code quality tooling (Checkstyle, PMD, SpotBugs, JaCoCo) and distribution settings.</description>
     <url>https://${serverUrl}/</url>
     <packaging>pom</packaging>
     <version>8.0.1-SNAPSHOT</version>
 
     <properties>
         <!-- Misc build parameters -->
-        <memory.min>256m</memory.min>
-        <memory.max>1g</memory.max>
-        <targetJdk>17</targetJdk>
-        <maven.compiler.release>17</maven.compiler.release>
+        <java.version>17</java.version>
+        <!-- targetJdk is consumed by the Jenkins pipeline to select the JDK used for compilation -->
+        <targetJdk>${java.version}</targetJdk>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -43,8 +44,6 @@
         <maven-surefire-report-plugin.version>3.5.5</maven-surefire-report-plugin.version>
         <maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
-        <maven-jdepend-plugin.version>2.2.0</maven-jdepend-plugin.version>
-        <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
         <maven-taglist-plugin.version>3.2.2</maven-taglist-plugin.version>
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
@@ -145,6 +144,9 @@
             <id>lutece</id>
             <name>luteceRepository</name>
             <url>https://${serverUrl}/maven_repository</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -153,6 +155,9 @@
             <id>luteceSnapshot</id>
             <name>luteceSnapshot</name>
             <url>https://${serverUrl}/snapshot_repository</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -164,11 +169,20 @@
             <id>lutece</id>
             <name>luteceRepository</name>
             <url>https://${serverUrl}/maven_repository</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </pluginRepository>
         <pluginRepository>
             <id>luteceSnapshot</id>
             <name>luteceSnapshot</name>
             <url>https://${serverUrl}/snapshot_repository</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -320,8 +334,6 @@
                     </reportSet>
                 </reportSets>
                 <configuration>
-                    <minmemory>${memory.min}</minmemory>
-                    <maxmemory>${memory.max}</maxmemory>
                     <configLocation>${build-config.location}/lutece_checks.xml</configLocation>
                     <headerLocation>${build-config.location}/checkstyle-header.txt</headerLocation>
                 </configuration>
@@ -332,8 +344,6 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>${maven-pmd-plugin.version}</version>
                 <configuration>
-                    <minmemory>${memory.min}</minmemory>
-                    <maxmemory>${memory.max}</maxmemory>
                     <linkXref>true</linkXref>
                     <rulesets>
                         <ruleset>${build-config.location}/pmd_categories/pmd-lutece.xml</ruleset>
@@ -342,12 +352,6 @@
                     <failOnViolation>false</failOnViolation>
                     <printFailingErrors>true</printFailingErrors>
                 </configuration>
-            </plugin>
-            <!--    JDEPEND       -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jdepend-maven-plugin</artifactId>
-                <version>${maven-jdepend-plugin.version}</version>
             </plugin>
             <!--    TAG LIST       -->
             <plugin>
@@ -445,7 +449,7 @@
                         </goals>
                         <configuration>
                             <rules>
-                                <!-- Enforce maven [3.6,) -->
+                                <!-- Enforce maven [3.9,) -->
                                 <requireMavenVersion>
                                     <version>3.9</version>
                                 </requireMavenVersion>
@@ -465,8 +469,6 @@
                 <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
                     <show>public</show>
-                    <minmemory>${memory.min}</minmemory>
-                    <maxmemory>${memory.max}</maxmemory>
                     <additionalOptions>
                         <additionalOption>-Xdoclint:none</additionalOption>
                     </additionalOptions>
@@ -554,7 +556,7 @@
                 <configuration>
                     <forkCount>1</forkCount>
                     <reuseForks>true</reuseForks>
-                    <argLine>${jacoco.agent.argLine}</argLine>
+                    <argLine>@{jacoco.agent.argLine}</argLine>
                     <testFailureIgnore>true</testFailureIgnore>
                     <excludes>
                         <exclude>**/MainTest.java</exclude>
@@ -758,8 +760,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>${maven-resources-plugin.version}</version>
-            </plugin>     
-             <plugin>
+            </plugin>
+            <plugin>
                 <groupId>fr.paris.lutece.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
                 <version>${liberty-maven-plugin.version}</version>
