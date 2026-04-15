@@ -61,6 +61,7 @@
         <build-config.version>3.0.1-SNAPSHOT</build-config.version>
         <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
         <spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
+        <findsecbugs-plugin.version>1.13.0</findsecbugs-plugin.version>
         <liberty-maven-plugin.version>3.12.1</liberty-maven-plugin.version>
         <jakarta.jakartaee-api.version>10.0.0</jakarta.jakartaee-api.version>
         <microprofile.version>6.1</microprofile.version>
@@ -95,8 +96,11 @@
         <sonar.host.url>https://${serverUrl}/sonar</sonar.host.url>
         <sonar.sources>pom.xml,src/java,webapp</sonar.sources>
         <sonar.tests>src/test</sonar.tests>
+        <sonar.sourceEncoding>${project.build.sourceEncoding}</sonar.sourceEncoding>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <!-- Exclude vendor JS/CSS libraries from CPD and duplication analysis -->
+        <sonar.cpd.exclusions>webapp/js/**/lib/**,webapp/themes/**/lib/**,webapp/themes/**/shared/js/lib/**</sonar.cpd.exclusions>
 
         <current.year>${maven.build.timestamp}</current.year>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
@@ -351,6 +355,11 @@
                     <failsOnError>false</failsOnError>
                     <failOnViolation>false</failOnViolation>
                     <printFailingErrors>true</printFailingErrors>
+                    <!-- Exclude vendor JS/CSS libraries from CPD analysis -->
+                    <excludeRoots>
+                        <excludeRoot>webapp/js/lib</excludeRoot>
+                        <excludeRoot>webapp/themes</excludeRoot>
+                    </excludeRoots>
                 </configuration>
             </plugin>
             <!--    TAG LIST       -->
@@ -729,7 +738,7 @@
                         <plugin>
                             <groupId>com.h3xstream.findsecbugs</groupId>
                             <artifactId>findsecbugs-plugin</artifactId>
-                            <version>1.12.0</version>
+                            <version>${findsecbugs-plugin.version}</version>
                         </plugin>
                     </plugins>
                 </configuration>
