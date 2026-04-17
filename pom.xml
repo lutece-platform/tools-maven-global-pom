@@ -63,10 +63,18 @@
         <maven-wagon-ftp.version>2.6</maven-wagon-ftp.version>
         <build-config.version>2.0.4-beta-01</build-config.version>
 
+        <commons.lang.version>3.19.0</commons.lang.version>
+        <common.beanutils.version>1.11.0</common.beanutils.version>
+        <commons.fileupload.version>1.6.0</commons.fileupload.version>
+        <spring.version>5.3.39</spring.version>
+        <log4j.version>2.25.3</log4j.version>
+        <jackson.version>2.15.4</jackson.version>
+        <slf4j.version>1.7.21</slf4j.version>
+
         <!-- Runtime dependencies versions -->
         <servlet-api.version>4.0.4</servlet-api.version>
         <jsp-api.version>2.3.6</jsp-api.version>
-        <library-lutece-unit-testing.version>4.1.1</library-lutece-unit-testing.version>
+        <library-lutece-unit-testing.version>4.1.2-SNAPSHOT</library-lutece-unit-testing.version>
         <!-- All database connectors must be kept in sync -->
         <!-- with src/main/resources/build-config/ant/build.properties file present in tools-maven-build-config plugin-->
         <mysql.version>9.5.0</mysql.version>
@@ -165,6 +173,87 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-bom</artifactId>
+                <version>${log4j.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>           
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons.fileupload.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${common.beanutils.version}</version>
+            </dependency>
+
+            <!--Spring-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
