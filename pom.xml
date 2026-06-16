@@ -7,7 +7,7 @@
     <description>Parent POM shared by all Lutece projects (core, plugins, modules, sites and tools). Centralizes Java/Jakarta EE versions, build plugins configuration, reporting, code quality tooling (Checkstyle, PMD, SpotBugs, JaCoCo) and distribution settings.</description>
     <url>https://${serverUrl}/</url>
     <packaging>pom</packaging>
-    <version>8.0.1</version>
+    <version>8.0.2-SNAPSHOT</version>
 
     <properties>
         <!-- Misc build parameters -->
