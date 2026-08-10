@@ -66,7 +66,7 @@
         <!-- Runtime dependencies versions -->
         <servlet-api.version>4.0.4</servlet-api.version>
         <jsp-api.version>2.3.6</jsp-api.version>
-        <library-lutece-unit-testing.version>4.1.1</library-lutece-unit-testing.version>
+        <library-lutece-unit-testing.version>4.1.2-SNAPSHOT</library-lutece-unit-testing.version>
         <!-- All database connectors must be kept in sync -->
         <!-- with src/main/resources/build-config/ant/build.properties file present in tools-maven-build-config plugin-->
         <mysql.version>9.5.0</mysql.version>
