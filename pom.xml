@@ -78,7 +78,7 @@
         <!-- All database connectors must be kept in sync -->
         <!-- with src/main/resources/build-config/ant/build.properties file present in tools-maven-build-config plugin-->
         <mariadb.version>3.5.8</mariadb.version>
-        <postgresql.version>42.7.10</postgresql.version>
+        <postgresql.version>42.7.13</postgresql.version>
         <hsqldb.version>2.7.4</hsqldb.version>
 
         <!-- directory provided by the artifact fr.paris.lutece.tools:build-config -->
