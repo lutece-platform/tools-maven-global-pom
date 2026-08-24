@@ -572,6 +572,9 @@
                         <exclude>**/TestRunner.java</exclude>
                         <exclude>**/LuteceTestCase.java</exclude>
                         <exclude>**/AllTests.java</exclude>
+                        <!-- lutece:exploded copies target/lutece/WEB-INF into target/test-classes:
+                             do not scan the webapp classes, they are not tests -->
+                        <exclude>**/WEB-INF/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
