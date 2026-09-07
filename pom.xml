@@ -68,13 +68,17 @@
         <microprofile.version>6.1</microprofile.version>
         <commons.lang.version>3.20.0</commons.lang.version>
         <common.beanutils.version>1.11.0</common.beanutils.version>
+        <log4j-bom.version>2.26.1</log4j-bom.version>
+        <jackson-bom.version>2.22.2</jackson-bom.version>
+        <slf4j-api.version>2.0.19</slf4j-api.version>
+        <commons-logging.version>1.4.0</commons-logging.version>
 
         <!-- Runtime dependencies versions -->
         <library-lutece-unit-testing.version>5.0.1</library-lutece-unit-testing.version>
         <test-jaxb-runtime.version>4.0.5</test-jaxb-runtime.version>
         <test-hibernate-validator.version>8.0.1.Final</test-hibernate-validator.version>
         <test-jakarta.el.version>5.0.0-M1</test-jakarta.el.version>
-		<junit-bom.version>5.14.4</junit-bom.version>
+        <junit-bom.version>5.14.4</junit-bom.version>
 
         <!-- Single source of truth for the JDBC connectors: inheriting projects
              (lutece-core included) must reference ${mariadb.version},
@@ -202,14 +206,14 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-bom</artifactId>
-                <version>2.25.4</version>
+                <version>${log4j-bom.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>2.21.2</version>
+                <version>${jackson-bom.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -256,12 +260,12 @@
             <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
-                <version>1.3.6</version>
+                <version>${commons-logging.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>2.0.17</version>
+                <version>${slf4j-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
