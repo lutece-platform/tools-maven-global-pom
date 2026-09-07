@@ -32,18 +32,18 @@
 
         <!-- Build dependencies versions -->
         <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
-        <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+        <maven-site-plugin.version>3.22.0</maven-site-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
         <maven-formatter-plugin.version>2.29.0</maven-formatter-plugin.version>
         <maven-war-plugin.version>3.5.1</maven-war-plugin.version>
         <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
-        <maven-jacoco-plugin.version>0.8.12</maven-jacoco-plugin.version>
+        <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
-        <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
-        <maven-surefire-report-plugin.version>3.5.5</maven-surefire-report-plugin.version>
+        <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
+        <maven-surefire-report-plugin.version>3.5.6</maven-surefire-report-plugin.version>
         <maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>
-        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
         <maven-taglist-plugin.version>3.2.2</maven-taglist-plugin.version>
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
@@ -59,9 +59,10 @@
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <maven-wagon-ftp.version>3.5.3</maven-wagon-ftp.version>
         <build-config.version>3.0.1</build-config.version>
-        <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
+        <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
+        <versions-maven-plugin.version>2.21.0</versions-maven-plugin.version>
         <spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
-        <findsecbugs-plugin.version>1.13.0</findsecbugs-plugin.version>
+        <findsecbugs-plugin.version>1.14.0</findsecbugs-plugin.version>
         <liberty-maven-plugin.version>3.12.1</liberty-maven-plugin.version>
         <jakarta.jakartaee-api.version>10.0.0</jakarta.jakartaee-api.version>
         <microprofile.version>6.1</microprofile.version>
@@ -75,9 +76,11 @@
         <test-jakarta.el.version>5.0.0-M1</test-jakarta.el.version>
 		<junit-bom.version>5.14.4</junit-bom.version>
 
-        <!-- All database connectors must be kept in sync -->
-        <!-- with src/main/resources/build-config/ant/build.properties file present in tools-maven-build-config plugin-->
-        <mariadb.version>3.5.8</mariadb.version>
+        <!-- Single source of truth for the JDBC connectors: inheriting projects
+             (lutece-core included) must reference ${mariadb.version},
+             ${postgresql.version} and ${hsqldb.version} without redeclaring them.
+             The connectors are activated by the db profiles at the end of this pom. -->
+        <mariadb.version>3.5.10</mariadb.version>
         <postgresql.version>42.7.13</postgresql.version>
         <hsqldb.version>2.7.4</hsqldb.version>
 
@@ -445,6 +448,31 @@
             </testResource>
         </testResources>
 
+        <pluginManagement>
+            <plugins>
+                <!-- Version audit tooling, not bound to the lifecycle.
+                     Usage : mvn versions:display-plugin-updates
+                             mvn versions:display-property-updates
+                             mvn versions:display-dependency-updates -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${versions-maven-plugin.version}</version>
+                    <configuration>
+                        <!-- never propose milestones, betas or release candidates -->
+                        <ruleSet>
+                            <ignoreVersions>
+                                <ignoreVersion>
+                                    <type>regex</type>
+                                    <version>(?i).*-(alpha|beta|m|rc|cr)[-.]?\d*</version>
+                                </ignoreVersion>
+                            </ignoreVersions>
+                        </ruleSet>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -458,9 +486,11 @@
                         </goals>
                         <configuration>
                             <rules>
-                                <!-- Enforce maven [3.9,) -->
+                                <!-- Enforce maven [3.9,4.0.0) : Maven 4 is not supported yet,
+                                     the build plugins are still on their 3.x lines.
+                                     Recommended version : the latest Maven 3.9.x -->
                                 <requireMavenVersion>
-                                    <version>3.9</version>
+                                    <version>[3.9,4.0.0)</version>
                                 </requireMavenVersion>
                                 <!-- Enforce Java [17,) -->
                                 <requireJavaVersion>
@@ -843,7 +873,6 @@
                 <dependency>
                     <groupId>org.mariadb.jdbc</groupId>
                     <artifactId>mariadb-java-client</artifactId>
-                    <!-- Must be kept in sync with lutece-core src/sql/build.properties -->
                     <version>${mariadb.version}</version>
                     <optional>true</optional>
                 </dependency>
