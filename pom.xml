@@ -61,6 +61,10 @@
         <build-config.version>3.0.1</build-config.version>
         <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
         <versions-maven-plugin.version>2.21.0</versions-maven-plugin.version>
+        <!-- Dependency graph enforcer rules: blocking. A project hitting a real
+             conflict can unblock itself with -Denforcer.dependencyRules.fail=false
+             while it is being fixed, without disabling the Maven and Java checks. -->
+        <enforcer.dependencyRules.fail>true</enforcer.dependencyRules.fail>
         <spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
         <findsecbugs-plugin.version>1.14.0</findsecbugs-plugin.version>
         <liberty-maven-plugin.version>3.12.1</liberty-maven-plugin.version>
@@ -500,6 +504,29 @@
                                 <requireJavaVersion>
                                     <version>17</version>
                                 </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- Separate execution on purpose: <fail> applies to the whole
+                             execution, so switching these rules off must not switch off
+                             the Maven and Java version checks along with them. -->
+                        <id>enforce-dependencies</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <fail>${enforcer.dependencyRules.fail}</fail>
+                            <rules>
+                                <!-- Fails when the resolved version of a transitive
+                                     dependency is lower than what another dependency
+                                     requires: turns a runtime NoSuchMethodError into a
+                                     build-time report. -->
+                                <requireUpperBoundDeps/>
+                                <!-- Bans declaring the same groupId:artifactId twice in
+                                     a single POM, where one declaration is silently
+                                     ignored. -->
+                                <banDuplicatePomDependencyVersions/>
                             </rules>
                         </configuration>
                     </execution>
