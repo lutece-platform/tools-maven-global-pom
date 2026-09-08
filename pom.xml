@@ -65,6 +65,9 @@
              conflict can unblock itself with -Denforcer.dependencyRules.fail=false
              while it is being fixed, without disabling the Maven and Java checks. -->
         <enforcer.dependencyRules.fail>true</enforcer.dependencyRules.fail>
+        <!-- Set to true to silence the dependency divergence report on a project
+             where it has been reviewed and judged to be only benign cases. -->
+        <enforcer.dependencyReport.skip>false</enforcer.dependencyReport.skip>
         <spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
         <findsecbugs-plugin.version>1.14.0</findsecbugs-plugin.version>
         <liberty-maven-plugin.version>3.12.1</liberty-maven-plugin.version>
@@ -527,6 +530,24 @@
                                      a single POM, where one declaration is silently
                                      ignored. -->
                                 <banDuplicatePomDependencyVersions/>
+                            </rules>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- Report only, never fails: lists every version divergence in
+                             the graph, including the harmless ones where the resolved
+                             version is already the higher one. Gives visibility on what
+                             requireUpperBoundDeps lets through, without turning benign
+                             divergences into build failures. -->
+                        <id>report-dependency-divergence</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${enforcer.dependencyReport.skip}</skip>
+                            <fail>false</fail>
+                            <rules>
+                                <dependencyConvergence/>
                             </rules>
                         </configuration>
                     </execution>
