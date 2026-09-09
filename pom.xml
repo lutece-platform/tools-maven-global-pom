@@ -72,19 +72,22 @@
         <findsecbugs-plugin.version>1.14.0</findsecbugs-plugin.version>
         <liberty-maven-plugin.version>3.12.1</liberty-maven-plugin.version>
         <jakarta.jakartaee-api.version>10.0.0</jakarta.jakartaee-api.version>
-        <microprofile.version>6.1</microprofile.version>
+        <microprofile.version>7.1</microprofile.version>
         <commons.lang.version>3.20.0</commons.lang.version>
         <common.beanutils.version>1.11.0</common.beanutils.version>
         <log4j-bom.version>2.26.1</log4j-bom.version>
         <jackson-bom.version>2.22.2</jackson-bom.version>
         <slf4j-api.version>2.0.19</slf4j-api.version>
         <commons-logging.version>1.4.0</commons-logging.version>
+        <jboss-logging.version>3.6.3.Final</jboss-logging.version>
+        <jakarta.el-api.version>5.0.1</jakarta.el-api.version>
+        <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
 
         <!-- Runtime dependencies versions -->
-        <library-lutece-unit-testing.version>5.0.1</library-lutece-unit-testing.version>
-        <test-jaxb-runtime.version>4.0.5</test-jaxb-runtime.version>
-        <test-hibernate-validator.version>8.0.1.Final</test-hibernate-validator.version>
-        <test-jakarta.el.version>5.0.0-M1</test-jakarta.el.version>
+        <library-lutece-unit-testing.version>5.0.2-SNAPSHOT</library-lutece-unit-testing.version>
+        <test-jaxb-runtime.version>4.0.9</test-jaxb-runtime.version>
+        <test-hibernate-validator.version>8.0.5.Final</test-hibernate-validator.version>
+        <test-expressly.version>5.0.0</test-expressly.version>
         <junit-bom.version>5.14.4</junit-bom.version>
 
         <!-- Single source of truth for the JDBC connectors: inheriting projects
@@ -224,6 +227,29 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            <!--
+              Circular by design: library-lutece-unit-testing has this pom as its parent,
+              while this pom manages its version. Harmless at build time, because
+              dependencyManagement is never resolved unless a project actually declares
+              the dependency: this pom builds fine even when the version below points at
+              an artifact that does not exist yet.
+              Two consequences at release time:
+               - release:prepare does NOT inspect dependencyManagement for SNAPSHOTs (it
+                 only checks the resolved dependencies, the plugins and the parent), so
+                 nothing stops you from releasing this pom while the version below is a
+                 SNAPSHOT. That would publish a released parent forcing every consuming
+                 project onto a SNAPSHOT. Always set a release version here first.
+               - release THIS pom first, pointing at the not-yet-published library
+                 version, then release the library against it. The reverse order cannot
+                 work: release:prepare does check the parent, so the library needs a
+                 released parent. Keep the window between the two short, since a project
+                 bumping its parent in between would fail to resolve the library.
+              Note the version below cannot lag one release behind either: the
+              jboss-logging / jakarta.el-api / jakarta.annotation-api versions managed
+              further down are calibrated for the Jakarta EE 10 stack of the library
+              version named here. Pointing at a library built on a different CDI
+              generation makes requireUpperBoundDeps fail in every consuming project.
+            -->
             <dependency>
                 <groupId>fr.paris.lutece.plugins</groupId>
                 <artifactId>library-lutece-unit-testing</artifactId>
@@ -237,10 +263,16 @@
                 <version>${test-hibernate-validator.version}</version>
                 <scope>test</scope>
             </dependency>
+            <!--
+              Jakarta EL implementation needed at runtime by hibernate-validator's
+              message interpolation. org.glassfish:jakarta.el never got a release past
+              5.0.0-M1: the artifact was renamed to org.glassfish.expressly:expressly,
+              which is also what hibernate-validator itself depends on nowadays.
+            -->
             <dependency>
-                <groupId>org.glassfish</groupId>
-                <artifactId>jakarta.el</artifactId>
-                <version>${test-jakarta.el.version}</version>
+                <groupId>org.glassfish.expressly</groupId>
+                <artifactId>expressly</artifactId>
+                <version>${test-expressly.version}</version>
                 <type>jar</type>
                 <scope>test</scope>
             </dependency>
@@ -268,6 +300,38 @@
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
                 <version>${commons-logging.version}</version>
+            </dependency>
+            <!--
+              jboss-logging is a transitive dependency of hibernate-validator (3.4.3),
+              Weld (3.5.0) and SmallRye Config (3.6.3) with different versions. SmallRye
+              needs the Logger.getMessageLogger(MethodHandles.Lookup, ...) overload added
+              in 3.6, so resolving a nearer older version breaks every test at startup
+              with a NoSuchMethodError.
+              Specify the latest version here to not depend on the order of declaration.
+            -->
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+                <version>${jboss-logging.version}</version>
+            </dependency>
+            <!--
+              Same situation for jakarta.el-api: expressly (the test EL implementation)
+              requests 5.0.0 while Weld requests 5.0.1. Align on the highest so the test
+              classpath does not depend on declaration order.
+            -->
+            <dependency>
+                <groupId>jakarta.el</groupId>
+                <artifactId>jakarta.el-api</artifactId>
+                <version>${jakarta.el-api.version}</version>
+            </dependency>
+            <!--
+              Same again for jakarta.annotation-api: CDI 4.0.1 and interceptor-api 2.1.0
+              request 2.1.0 while Weld and SmallRye Config request 2.1.1.
+            -->
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>${jakarta.annotation-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -525,7 +589,11 @@
                                      dependency is lower than what another dependency
                                      requires: turns a runtime NoSuchMethodError into a
                                      build-time report. -->
-                                <requireUpperBoundDeps/>
+                                <requireUpperBoundDeps>
+                                    <excludedScopes>
+                                        <excludedScope>provided</excludedScope>
+                                    </excludedScopes>
+                                </requireUpperBoundDeps>
                                 <!-- Bans declaring the same groupId:artifactId twice in
                                      a single POM, where one declaration is silently
                                      ignored. -->
@@ -547,7 +615,11 @@
                             <skip>${enforcer.dependencyReport.skip}</skip>
                             <fail>false</fail>
                             <rules>
-                                <dependencyConvergence/>
+                                <dependencyConvergence>
+                                    <excludedScopes>
+                                        <excludedScope>provided</excludedScope>
+                                    </excludedScopes>
+                                </dependencyConvergence>
                             </rules>
                         </configuration>
                     </execution>
