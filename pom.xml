@@ -70,7 +70,7 @@
         <enforcer.dependencyReport.skip>false</enforcer.dependencyReport.skip>
         <spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
         <findsecbugs-plugin.version>1.14.0</findsecbugs-plugin.version>
-        <liberty-maven-plugin.version>3.12.1</liberty-maven-plugin.version>
+        <liberty-maven-plugin.version>3.12.3-SNAPSHOT</liberty-maven-plugin.version>
         <jakarta.jakartaee-api.version>10.0.0</jakarta.jakartaee-api.version>
         <microprofile.version>7.1</microprofile.version>
         <commons.lang.version>3.20.0</commons.lang.version>
