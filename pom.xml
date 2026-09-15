@@ -32,6 +32,8 @@
         <!-- Build dependencies versions -->
         <maven-prerequisite.version>3.3.9</maven-prerequisite.version>
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+        <!-- the Ant embedded by maven-antrun-plugin above ; compile-time reference for Ant extensions (library-sql-utils) -->
+        <ant.version>1.9.4</ant.version>
         <maven-site-plugin.version>3.22.0</maven-site-plugin.version>
         <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
         <maven-pmd-plugin.version>3.12.0</maven-pmd-plugin.version>
@@ -166,6 +168,17 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- Ant extensions compile against the Ant of maven-antrun-plugin ; never shipped, the Ant runtime provides it -->
+            <dependency>
+                <groupId>org.apache.ant</groupId>
+                <artifactId>ant</artifactId>
+                <version>${ant.version}</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>jakarta.servlet</groupId>
