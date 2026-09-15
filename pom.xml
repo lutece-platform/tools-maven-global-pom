@@ -32,6 +32,8 @@
 
         <!-- Build dependencies versions -->
         <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
+        <!-- the Ant embedded by maven-antrun-plugin above ; compile-time reference for Ant extensions (library-sql-utils) -->
+        <ant.version>1.10.15</ant.version>
         <maven-site-plugin.version>3.22.0</maven-site-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
@@ -227,6 +229,13 @@
                 <version>${jackson-bom.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <!-- Ant extensions compile against the Ant of maven-antrun-plugin ; never shipped, the Ant runtime provides it -->
+            <dependency>
+                <groupId>org.apache.ant</groupId>
+                <artifactId>ant</artifactId>
+                <version>${ant.version}</version>
+                <scope>provided</scope>
             </dependency>
             <!--
               Circular by design: library-lutece-unit-testing has this pom as its parent,
