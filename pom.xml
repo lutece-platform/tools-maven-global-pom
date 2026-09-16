@@ -839,6 +839,9 @@
                 <version>${maven-formatter-plugin.version}</version>
                 <configuration>
                     <configFile>${build-config.location}/lutece_formatter.xml</configFile>
+                    <compilerSource>${java.version}</compilerSource>
+                    <compilerCompliance>${java.version}</compilerCompliance>
+                    <compilerTargetPlatform>${java.version}</compilerTargetPlatform>
                 </configuration>
             </plugin>
             <plugin>
