@@ -75,6 +75,8 @@
         <microprofile.version>7.1</microprofile.version>
         <commons.lang.version>3.20.0</commons.lang.version>
         <commons.collection4.version>4.6.0</commons.collection4.version>
+        <commons.codec.version>1.22.1</commons.codec.version>
+        <commons.io.version>2.22.0</commons.io.version>
         <common.beanutils.version>1.11.0</common.beanutils.version>
         <log4j-bom.version>2.26.1</log4j-bom.version>
         <jackson-bom.version>2.22.2</jackson-bom.version>
@@ -350,6 +352,23 @@
 			    <version>${commons.collection4.version}</version>
 			    
 			</dependency>			            
+            <!--
+              commons-codec and commons-io reach almost every project transitively, through
+              POI, Tika, ical4j, liquibase, httpclient and others, each pinning its own
+              version. Whichever sits nearest in the graph wins, which regularly downgrades
+              what lutece-core ships and trips requireUpperBoundDeps in consuming projects.
+              Managing them here settles the platform version once.
+            -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
             <!-- BeanUtils -->
             <dependency>
                 <groupId>commons-beanutils</groupId>
