@@ -60,7 +60,7 @@
         <ant-optional.version>1.5.3-1</ant-optional.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <maven-wagon-ftp.version>3.5.3</maven-wagon-ftp.version>
-        <build-config.version>3.0.1</build-config.version>
+        <build-config.version>3.0.2-SNAPSHOT</build-config.version>
         <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
         <versions-maven-plugin.version>2.21.0</versions-maven-plugin.version>
         <!-- Dependency graph enforcer rules: blocking. A project hitting a real
