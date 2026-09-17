@@ -58,7 +58,7 @@
         <ant-optional.version>1.5.3-1</ant-optional.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <maven-wagon-ftp.version>3.5.3</maven-wagon-ftp.version>
-        <build-config.version>3.0.1</build-config.version>
+        <build-config.version>3.0.2-SNAPSHOT</build-config.version>
         <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
         <versions-maven-plugin.version>2.21.0</versions-maven-plugin.version>
         <!-- Dependency graph enforcer rules: blocking. A project hitting a real
@@ -990,9 +990,32 @@
         <!-- databases drivers, for tests only -->
         <!-- Do not activate these for releases -->
         <!-- Choose your driver during tests with one of the following: -->
-        <!--   mvn -Dlutece-test-mysql ... -->
+        <!--   mvn -Dlutece-test-mariadb ... -->
+        <!--   mvn -Dlutece-test-mysql ... (historical alias of lutece-test-mariadb, kept so existing Jenkins pipelines keep working) -->
         <!--   mvn -Dlutece-test-hsql ... -->
         <!--   mvn -Dlutece-test-postgresql ... -->
+        <profile>
+            <id>lutece-test-mariadb</id>
+            <activation>
+                <property>
+                    <name>lutece-test-mariadb</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.mariadb.jdbc</groupId>
+                    <artifactId>mariadb-java-client</artifactId>
+                    <version>${mariadb.version}</version>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+            <properties>
+                <antrun-lutece-db-properties>db-test-mariadb.properties</antrun-lutece-db-properties>
+            </properties>
+        </profile>
+        <!-- Historical alias of lutece-test-mariadb, kept so existing Jenkins
+             pipelines invoking -Dlutece-test-mysql keep working unchanged.
+             db-test-mysql.properties has the same content as db-test-mariadb.properties. -->
         <profile>
             <id>lutece-test-mysql</id>
             <activation>
