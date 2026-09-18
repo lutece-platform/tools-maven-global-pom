@@ -7,7 +7,7 @@
     <description>Parent POM shared by all Lutece projects (core, plugins, modules, sites and tools). Centralizes Java/Jakarta EE versions, build plugins configuration, reporting, code quality tooling (Checkstyle, PMD, SpotBugs, JaCoCo) and distribution settings.</description>
     <url>https://${serverUrl}/</url>
     <packaging>pom</packaging>
-    <version>8.0.2-SNAPSHOT</version>
+    <version>8.0.2</version>
 
     <properties>
         <!-- Misc build parameters -->
@@ -623,7 +623,7 @@
                                 <!-- Bans declaring the same groupId:artifactId twice in
                                      a single POM, where one declaration is silently
                                      ignored. -->
-                                <banDuplicatePomDependencyVersions/>
+                                <banDuplicatePomDependencyVersions />
                             </rules>
                         </configuration>
                     </execution>
@@ -1005,7 +1005,7 @@
         <connection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/tools-maven-global-pom.git</developerConnection>
         <url>https://github.com/lutece-platform/tools-maven-global-pom.git</url>
-        <tag>HEAD</tag>
+        <tag>lutece-global-pom-8.0.2</tag>
     </scm>
 
     <profiles>
