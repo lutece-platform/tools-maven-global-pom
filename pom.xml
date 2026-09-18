@@ -49,7 +49,7 @@
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
         <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
         <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
-        <maven-lutece-plugin.version>7.2.0-SNAPSHOT</maven-lutece-plugin.version>
+        <maven-lutece-plugin.version>7.2.0</maven-lutece-plugin.version>
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
         <lutece-maven-report.version>1.0.0</lutece-maven-report.version>
         <license-maven-plugin.version>4.1</license-maven-plugin.version>
@@ -58,7 +58,7 @@
         <ant-optional.version>1.5.3-1</ant-optional.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <maven-wagon-ftp.version>3.5.3</maven-wagon-ftp.version>
-        <build-config.version>3.0.2-SNAPSHOT</build-config.version>
+        <build-config.version>3.0.2</build-config.version>
         <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
         <versions-maven-plugin.version>2.21.0</versions-maven-plugin.version>
         <!-- Dependency graph enforcer rules: blocking. A project hitting a real
@@ -70,7 +70,7 @@
         <enforcer.dependencyReport.skip>false</enforcer.dependencyReport.skip>
         <spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
         <findsecbugs-plugin.version>1.14.0</findsecbugs-plugin.version>
-        <liberty-maven-plugin.version>3.12.3-SNAPSHOT</liberty-maven-plugin.version>
+        <liberty-maven-plugin.version>3.12.3</liberty-maven-plugin.version>
         <jakarta.jakartaee-api.version>10.0.0</jakarta.jakartaee-api.version>
         <microprofile.version>7.1</microprofile.version>
         <commons.lang.version>3.20.0</commons.lang.version>
@@ -87,7 +87,7 @@
         <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
 
         <!-- Runtime dependencies versions -->
-        <library-lutece-unit-testing.version>5.0.2-SNAPSHOT</library-lutece-unit-testing.version>
+        <library-lutece-unit-testing.version>5.0.2</library-lutece-unit-testing.version>
         <test-jaxb-runtime.version>4.0.9</test-jaxb-runtime.version>
         <test-hibernate-validator.version>8.0.5.Final</test-hibernate-validator.version>
         <test-expressly.version>5.0.0</test-expressly.version>
