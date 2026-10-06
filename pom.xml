@@ -51,7 +51,7 @@
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
         <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
         <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
-        <maven-lutece-plugin.version>7.2.0</maven-lutece-plugin.version>
+        <maven-lutece-plugin.version>7.2.1-SNAPSHOT</maven-lutece-plugin.version>
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
         <lutece-maven-report.version>1.0.0</lutece-maven-report.version>
         <license-maven-plugin.version>4.1</license-maven-plugin.version>
