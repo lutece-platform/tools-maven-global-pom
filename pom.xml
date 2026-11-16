@@ -99,7 +99,7 @@
              (lutece-core included) must reference ${mariadb.version},
              ${postgresql.version} and ${hsqldb.version} without redeclaring them.
              The connectors are activated by the db profiles at the end of this pom. -->
-        <mariadb.version>3.5.10</mariadb.version>
+        <mariadb.version>3.5.11</mariadb.version>
         <postgresql.version>42.7.13</postgresql.version>
         <hsqldb.version>2.7.4</hsqldb.version>
 
